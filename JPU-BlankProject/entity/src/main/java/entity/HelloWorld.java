@@ -1,7 +1,7 @@
 package entity;
 
 /**
- * The Class HelloWorld.
+ * bonjour bande de con
  *
  * @author Jean-Aymeric Diet
  */
