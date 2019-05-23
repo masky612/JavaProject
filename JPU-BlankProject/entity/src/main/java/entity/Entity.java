@@ -1,7 +1,7 @@
 package entity;
 
 /**
- * The Class Entity.
+ * The Class Entity.1234
  *
  * @author Jean-Aymeric Diet
  */
