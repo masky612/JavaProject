@@ -1,7 +1,7 @@
 package entity;
 
 /**
- * bonjour bande de cons
+ * Je vous aime.
  *
  * @author Jean-Aymeric Diet
  */
