@@ -21,10 +21,10 @@ public interface IModel {
 	/**
 	 * Load the message.
 	 *
-	 * @param code
+	 * @param i
 	 *          the code
 	 */
-	void loadHelloWorld(String code);
+	void loadHelloWorld(int i);
 
 	/**
 	 * Gets the observable.
