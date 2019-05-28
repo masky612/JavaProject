@@ -125,7 +125,7 @@ public class HelloWorld extends Entity {
 			sprite= chaineMap.charAt(i);
 			
 			if (sprite == ';') {
-				y++;
+				y+=16;
 				x = 0;
 				spriteStr= ""+sprite;
 				map.put(new Point(x, y), spriteStr);
@@ -133,7 +133,7 @@ public class HelloWorld extends Entity {
 			} else {
 				spriteStr= ""+sprite;
 				map.put(new Point(x, y), spriteStr);	
-				x++;
+				x+=16;
 				//System.out.println("my sprite: " + spriteStr);	
 			}
 			
