@@ -2,7 +2,11 @@ package entity;
 
 import java.awt.Point;
 import java.util.HashMap;
-
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 /**
  * Mais c'est pas gentil
  *
@@ -116,24 +120,35 @@ public class HelloWorld extends Entity {
 		int x = 0;
 		int y = 0;
 		char sprite;
+		String spriteStr;
 		for (int i=0; i<chaineMap.length(); i++) {
 			sprite= chaineMap.charAt(i);
-			String spriteStr;
+			
 			if (sprite == ';') {
 				y++;
 				x = 0;
-				//System.out.println("Je suis if");	
+				spriteStr= ""+sprite;
+				map.put(new Point(x, y), spriteStr);
+				//System.out.println("i'm if");	
 			} else {
 				spriteStr= ""+sprite;
 				map.put(new Point(x, y), spriteStr);	
 				x++;
-				//System.out.println("mon sprite: " + spriteStr);	
+				//System.out.println("my sprite: " + spriteStr);	
 			}
 			
 		}
+		/*Set<Entry<Point, String>> setHm = map.entrySet();
+	      Iterator<Entry<Point, String>> it = setHm.iterator();
+	      while(it.hasNext()){
+	         Entry<Point, String> e = it.next();
+	         
+	        System.out.println((int)e.getKey().getY()+" "+(int)e.getKey().getX()+ " : " + e.getValue());
+	      }*/
 		return map;
 	}
 
+	
 	public String printMap(HashMap<Point, String> map) {
 		int height = 30;
 		int width = 30;
@@ -148,10 +163,11 @@ public class HelloWorld extends Entity {
 		for (Point c : map.keySet()) {
 			int index = (int) (c.getX() * (width + 1) + c.getY());
 			grid.setCharAt(index, map.get(c).toString().charAt(0));
-			// System.out.println(index);
+			//System.out.println(c.getX()+" "+c.getY());
 
 		}
-		System.out.println(grid.toString());
+		
+		//System.out.println(grid.toString());
 		return grid.toString();
 	}
 
