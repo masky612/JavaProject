@@ -1,5 +1,6 @@
 package view;
-
+import entity.Wall;
+import entity.Dirt;
 import entity.HelloWorld;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -110,9 +111,10 @@ class ViewPanel extends JPanel implements Observer {
             Iterator<Entry<Point, String>> it = setHm.iterator();
             while (it.hasNext()) {
                 Entry<Point, String> e = it.next();
-                img = replacePng(e.getValue());
+                img = replacePng(e.getValue(),e.getKey().x,e.getKey().y);
                 if (img != null) {
-                    graphics.drawImage(img, e.getKey().x, e.getKey().y, 16, 16, null);
+                
+                    graphics.drawImage(Wall.getImg(),Wall.getX(),Wall.getY(), 16, 16, null);
                 }
             }
         } catch (IOException ex) {
@@ -125,11 +127,17 @@ class ViewPanel extends JPanel implements Observer {
 
     }
 
-    public BufferedImage replacePng(String t) throws IOException {
+    public BufferedImage replacePng(String test,int x, int y) throws IOException {
         BufferedImage img = null;
-        if ("U".equals(t)) {
+        if ("U".equals(test)) {
             //System.out.println(e.getValue());
-            img = ImageIO.read(new File("D:\\pictures\\sprites\\diamond.png"));
+        	
+        	 img = ImageIO.read(new File("D:\\images\\wall.png")); 
+        new Wall(x,y,img);
+        }
+        else if("D".equals(test)) {
+        	 img = ImageIO.read(new File("D:\\images\\dirt.png"));
+        new Dirt(x,y,img);
         }
 
         return img;

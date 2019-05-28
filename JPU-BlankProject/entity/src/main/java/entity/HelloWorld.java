@@ -149,7 +149,7 @@ public class HelloWorld extends Entity {
 	}
 
 	
-	public String printMap(HashMap<Point, String> map) {
+	/*public String printMap(HashMap<Point, String> map) {
 		int height = 30;
 		int width = 30;
 		int lenght = height * width;
@@ -169,6 +169,6 @@ public class HelloWorld extends Entity {
 		
 		//System.out.println(grid.toString());
 		return grid.toString();
-	}
+	}*/
 
 }
