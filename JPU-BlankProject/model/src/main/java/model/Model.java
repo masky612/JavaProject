@@ -52,7 +52,7 @@ public final class Model extends Observable implements IModel {
 	/**
      * Load hello world.
      *
-     * @param string
+     * @param code
      *            the code
      */
 	/*
@@ -60,10 +60,10 @@ public final class Model extends Observable implements IModel {
 	 *
 	 * @see contract.IModel#getMessage(java.lang.String)
 	 */
-	public void loadHelloWorld(final String string) {
+	public void loadHelloWorld(final int code) {
 		try {
 			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-			this.setHelloWorld(daoHelloWorld.find(string));
+			this.setHelloWorld(daoHelloWorld.find(code));
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
@@ -81,12 +81,6 @@ public final class Model extends Observable implements IModel {
 	 */
 	public Observable getObservable() {
 		return this;
-	}
-
-	@Override
-	public void loadHelloWorld(int i) {
-		// TODO Auto-generated method stub
-		
 	}
 
 
