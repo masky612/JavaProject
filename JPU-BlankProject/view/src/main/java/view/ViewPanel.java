@@ -1,6 +1,8 @@
 package view;
 import entity.Wall;
+import entity.BreakableWall;
 import entity.Dirt;
+import entity.Exit;
 import entity.HelloWorld;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -130,7 +132,6 @@ class ViewPanel extends JPanel implements Observer {
     public BufferedImage replacePng(String test,int x, int y) throws IOException {
         BufferedImage img = null;
         if ("U".equals(test)) {
-            //System.out.println(e.getValue());
         	
         	 img = ImageIO.read(new File("D:\\images\\wall.png")); 
         new Wall(x,y,img);
@@ -139,7 +140,15 @@ class ViewPanel extends JPanel implements Observer {
         	 img = ImageIO.read(new File("D:\\images\\dirt.png"));
         new Dirt(x,y,img);
         }
-
+        
+        else if("E".equals(test)) {
+       	 img = ImageIO.read(new File("D:\\images\\exit.png"));
+       new Exit(x,y,img);
+        }
+        else if("B".equals(test)) {
+          	 img = ImageIO.read(new File("D:\\images\\breakableWall.png"));
+          new BreakableWall(x,y,img);
+           }
         return img;
     }
 
