@@ -2,9 +2,11 @@ package view;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -70,30 +72,36 @@ class ViewPanel extends JPanel implements Observer {
 	@Override
 	protected void paintComponent(final Graphics graphics) {
 		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
-		//BufferedImage img = null;
-		//BufferedImage img2 = null;
+	/*	BufferedImage img = null;
+		BufferedImage img2 = null;
 		String[] message =this.getViewFrame().getModel().getHelloWorld().getMessage().split(";");
 		int hauteur = 400;
 		for (String msg : message)  
         { 
 			graphics.drawString(msg, 750,hauteur);
 			hauteur+=10;
-        } 
-		/*try {
+        }*/
+		
+		
+		HashMap<Point, String> test =this.getViewFrame().getModel().getHelloWorld().createMap();
+		String test2 =this.getViewFrame().getModel().getHelloWorld().printMap(test);
+		 
+		
+		/*try { 
             img = ImageIO.read(new File("D:/images/wall.png"));
             img2 = ImageIO.read(new File("D:/images/diamond.png"));
-        } catch (IOException ex) {
+        } catch (IOException ex) { 
             ex.printStackTrace();
         }
         graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
        // graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage(), 10, 20);
 
         if (img != null) {
-        	graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+        	graphics.drawImage(img, 32, 0, 16, 16, this);
         }
         if (img2 != null) {
             graphics.drawImage(img2, 16, 0, 16,16, this);
-        }*/ 
+        }*/
 	}
 }
 
