@@ -49,6 +49,14 @@ public final class View implements IView, Runnable {
 				return ControllerOrder.map4;
 			case KeyEvent.VK_NUMPAD5:
 				return ControllerOrder.map5;
+			case KeyEvent.VK_UP:
+				return ControllerOrder.up;
+			case KeyEvent.VK_DOWN:
+				return ControllerOrder.down;
+			case KeyEvent.VK_LEFT:
+				return ControllerOrder.left;
+			case KeyEvent.VK_RIGHT:
+				return ControllerOrder.right;
 			default:
 				return ControllerOrder.map1;
 		}

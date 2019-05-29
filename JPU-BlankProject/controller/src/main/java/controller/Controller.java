@@ -88,6 +88,19 @@ public final class Controller implements IController {
 				break;
 			case map5:
 				this.model.loadHelloWorld(5);
+			case up:
+				this.view.movePlayer(x, y);
+				break;
+			case down:
+				this.view.movePlayer(x, y);
+				break;
+			case left:
+				this.view.movePlayer(x, y);
+				break;
+			case right:
+				this.view.movePlayer(x, y);
+				break;
+				
 			default:
 				break;
 		}

@@ -6,8 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Dirt extends Object {
-	public Dirt(final int x, final int y, BufferedImage img){
+public class BreakableWalls extends Object {
+	public BreakableWalls(final int x, final int y, BufferedImage img){
 		this.setY(y);
         this.setX(x);
         isBreakableByPlayer = false;
@@ -17,7 +17,7 @@ public class Dirt extends Object {
     
 	
     try {
-    	img = ImageIO.read(new File("D:pictures\\sprites\\dirt.png"));
+    	img = ImageIO.read(new File("D:pictures\\sprites\\breakableWall.png"));
         this.setImg(img);
     } catch (IOException e) {
         // TODO Auto-generated catch block

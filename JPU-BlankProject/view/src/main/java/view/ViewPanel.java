@@ -1,7 +1,12 @@
 package view;
 import entity.Wall;
+import entity.BreakableWalls;
+import entity.Diamonds;
 import entity.Dirt;
+import entity.Exit;
 import entity.HelloWorld;
+import entity.Rocks;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -88,38 +93,42 @@ class ViewPanel extends JPanel implements Observer {
 		 * 750,hauteur); hauteur+=10; }
          */
 
-        HashMap<Point, String> test = this.getViewFrame().getModel().getHelloWorld().createMap();
+       // HashMap<Point, Object> test = this.getViewFrame().getModel().getHelloWorld().createMap();
 
-        // String test2 = this.getViewFrame().getModel().getHelloWorld().printMap(test);
-        /*
-		 * char carac; for (int i=0; i<test2.length(); i++) { carac= test2.charAt(i); if
-		 * (carac=='U') {
-		 * 
-		 * try { img = ImageIO.read(new File("D:/images/wall.png"));
-		 * 
-		 * } catch (IOException ex) { ex.printStackTrace(); } graphics.clearRect(0, 0,
-		 * this.getWidth(), this.getHeight()); //
-		 * graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage
-		 * (), 10, 20);
-		 * 
-		 * if (img != null) { graphics.drawImage(img, 32, 0, 16, 16, this); }
-		 * 
-		 * } }
-         */
+        HashMap<Point, String> test = this.getViewFrame().getModel().getHelloWorld().createMap();
+      
+	
+       /* try {
+            Set<Entry<Point, Object>> setHm = test.entrySet();
+            Iterator<Entry<Point, Object>> it = setHm.iterator();
+            while (it.hasNext()) {
+                Entry<Point, Object> e = it.next();
+                img = ((Object) e.getValue()).getImg();
+               // img = replacePng(e.getValue(),e.getKey().x,e.getKey().y);
+                if (img != null) {
+                
+                    graphics.drawImage(Wall.getImg(),Wall.getX(),Wall.getY(), 32, 32, null);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }*/
+        
         try {
             Set<Entry<Point, String>> setHm = test.entrySet();
             Iterator<Entry<Point, String>> it = setHm.iterator();
             while (it.hasNext()) {
                 Entry<Point, String> e = it.next();
-                img = replacePng(e.getValue(),e.getKey().x,e.getKey().y);
+                img = replacePng(e.getValue(), e.getKey().x, e.getKey().y);
                 if (img != null) {
-                
-                    graphics.drawImage(Wall.getImg(),Wall.getX(),Wall.getY(), 16, 16, null);
+                    graphics.drawImage(Wall.getImg(), Wall.getX(), Wall.getY(), 16, 16, null);
                 }
             }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        
+        
         /*graphics.clearRect(0, 0, this.getWidth(),
                 this.getHeight()); //*/
        /* graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage(), 10, 20);*/
@@ -131,15 +140,28 @@ class ViewPanel extends JPanel implements Observer {
         BufferedImage img = null;
         if ("U".equals(test)) {
             //System.out.println(e.getValue());
-        	
-        	 img = ImageIO.read(new File("D:\\images\\wall.png")); 
-        new Wall(x,y,img);
-        }
-        else if("D".equals(test)) {
-        	 img = ImageIO.read(new File("D:\\images\\dirt.png"));
+       	 img = ImageIO.read(new File("D:\\pictures\\sprites\\wall.png"));
+
+        }else if("D".equals(test)) {
+        	 img = ImageIO.read(new File("D:\\pictures\\sprites\\dirt.png"));
         new Dirt(x,y,img);
         }
-
+        else if("R".equals(test)) {
+        	img = ImageIO.read(new File("D:\\pictures\\sprites\\rock.png"));
+            new Rocks(x,y,img);
+        }
+        else if("O".equals(test)) {
+        	img = ImageIO.read(new File("D:\\pictures\\sprites\\diamond.png"));
+            new Diamonds(x,y,img);
+        }
+        else if("E".equals(test)) {
+        	img = ImageIO.read(new File("D:\\pictures\\sprites\\exit.png"));
+            new Exit(x,y,img);
+        }
+        else if("B".equals(test)) {
+        	img = ImageIO.read(new File("D:\\pictures\\sprites\\breakableWall.png"));
+            new BreakableWalls(x,y,img);
+        }
         return img;
     }
 

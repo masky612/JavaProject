@@ -5,8 +5,11 @@ import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import contract.IController;
 import contract.IModel;
@@ -133,6 +136,7 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setContentPane(new ViewPanel(this));
 		this.setSize(1600 + this.getInsets().left + this.getInsets().right, 1080 + this.getInsets().top + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
+		
 	}
 
 	/**

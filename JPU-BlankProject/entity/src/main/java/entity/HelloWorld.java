@@ -125,15 +125,17 @@ public class HelloWorld extends Entity {
 			sprite= chaineMap.charAt(i);
 			
 			if (sprite == ';') {
-				y+=16;
+				y+=32;
 				x = 0;
-				spriteStr= ""+sprite;
+				spriteStr= String.valueOf(sprite);
+				//Object obj = Object.getObjFromSpriteStr(spriteStr, x, y);
 				map.put(new Point(x, y), spriteStr);
 				//System.out.println("i'm if");	
 			} else {
 				spriteStr= ""+sprite;
+				//Object obj = Object.getObjFromSpriteStr(spriteStr, x, y);
 				map.put(new Point(x, y), spriteStr);	
-				x+=16;
+				x+=32;
 				//System.out.println("my sprite: " + spriteStr);	
 			}
 			
