@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Image;
+import java.awt.Point;
 import java.io.IOException;
 
 public class Cave {
@@ -9,8 +10,8 @@ public class Cave {
 	protected boolean isMovable;
 	protected boolean isAlive;
 
-	private int x;
-	private int y;
+	protected int x;
+	protected int y;
 	private Image img;
 
 	public int getX() {
@@ -37,7 +38,7 @@ public class Cave {
 		this.img = img;
 	}
 
-	public static Cave getObjFromSpriteStr(String spriteStr, int x, int y) {
+	public static Cave getObjFromSpriteStr(String spriteStr, int x, int y) throws IOException {
 		// TODO Auto-generated method stub
 		switch (spriteStr) {
 		case "U":
@@ -57,7 +58,10 @@ public class Cave {
 		case "B":
 			return new BreakableWalls(x, y);
 		case "S":
-			return new Rockford(x,y);
+			Rockford.getInstance().setX(x);
+			Rockford.getInstance().setY(y);
+			Rockford.getInstance().setP(new Point(x,y));
+			return Rockford.getInstance();
 		default :
 			return new Wall(x,y);
 		}

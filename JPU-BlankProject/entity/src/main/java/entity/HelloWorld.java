@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Point;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -97,7 +98,7 @@ public class HelloWorld extends Entity {
 		this.message = message;
 	}
 
-	public HashMap<Point,Cave> createMap() {
+	public HashMap<Point,Cave> createMap() throws IOException {
 		/*String[] chaineMap = this.getMessage().split(",");
 		HashMap<Point, String> map = new HashMap<Point, String>();
 		int x = 0;

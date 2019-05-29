@@ -14,5 +14,5 @@ public interface IView {
 	 *          the message
 	 */
 	void printMessage(final String message);
-	void movePlayer(final int x, final int y);
+	void movePlayer(final int x, final int y, final ControllerOrder co);
 }

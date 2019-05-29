@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+
+
 public class Rockford extends Cave {
 	
 	
@@ -16,8 +18,84 @@ public class Rockford extends Cave {
 	private Image imgDown;
 	private Image imgLeft;
 	private Image imgRight;
+	private static Rockford INSTANCE = null;
 	
-	public Rockford(int x, int y)  {
+	public static synchronized Rockford getInstance() throws IOException {
+		if (Rockford.INSTANCE == null) {
+			Rockford.INSTANCE = new Rockford(0,0);
+		}
+		return Rockford.INSTANCE;
+	}
+	
+	public  Rockford(int x, int y) throws IOException {
+		this.setX(x);
+		this.setY(y);
+		this.p = new Point(x,y);
+		
+		
+		try {
+			this.imgUp = ImageIO.read(new File("D:\\images\\up.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.imgDown = ImageIO.read(new File("D:\\images\\down.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.imgLeft = ImageIO.read(new File("D:\\images\\left.png"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			this.imgRight = ImageIO.read(new File("D:\\images\\right.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			BufferedImage img = ImageIO.read(new File("D:\\images\\down.png"));
+			this.setImg(img);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+
+	
+	private Point p;
+	public Point getP() {
+		return p;
+	}
+
+	public void setP(Point p) {
+		this.p = p;
+	}
+
+	public Image getImgUp() {
+		return imgUp;
+	}
+
+	public Image getImgDown() {
+		return imgDown;
+	}
+
+	public Image getImgLeft() {
+		return imgLeft;
+	}
+
+	public Image getImgRight() {
+		return imgRight;
+	}
+	
+	/*public Rockford(int x, int y)  {
 		this.setX(x);
 		this.setY(y);
 		this.p = new Point(x,y);
@@ -79,5 +157,5 @@ public class Rockford extends Cave {
 
 	public Image getImgRight() {
 		return imgRight;
-	}
+	}*/
 }

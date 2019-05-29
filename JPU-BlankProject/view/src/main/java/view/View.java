@@ -1,9 +1,12 @@
 package view;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
-
+import view.ViewPanel;
 import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
@@ -91,8 +94,15 @@ public final class View implements IView, Runnable {
 	}
 
 	@Override
-	public void movePlayer(int x, int y) {
-		// TODO Auto-generated method stub
+	public void movePlayer(int x, int y, ControllerOrder co) {
+		try {
+			((ViewPanel)this.viewFrame.getContentPane()).movePlayer(x,y,co);
+		}
+		catch(IOException ex){
+			Logger.getLogger(View.class.getName()).log(Level.SEVERE,null, ex);
+		}
+		
+		
 		
 	}
 }
