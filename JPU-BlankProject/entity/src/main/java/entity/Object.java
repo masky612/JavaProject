@@ -7,33 +7,33 @@ public class Object {
 	protected boolean isBreakableByExplosion;
 	protected boolean isMovable;
 	protected boolean isAlive;
-	
-    private static int x;
-    private static int y;
-    private static Image img;
-    
-    public static int getX() {
-        return x;
-    }
 
-    public void setX(int x) {
-        Object.x = x;
-    }
+	private static int x;
+	private static int y;
+	private static Image img;
 
-    public static int getY() {
-        return y;
-    }
+	public static int getX() {
+		return x;
+	}
 
-    public void setY(int y) {
-        Object.y = y;
-    }
+	public void setX(int x) {
+		Object.x = x;
+	}
 
-    public static Image getImg() {
-        return img;
-    }
+	public static int getY() {
+		return y;
+	}
 
-    public void setImg(Image img) {
-        Object.img = img;
-    }
+	public void setY(int y) {
+		Object.y = y;
+	}
+
+	public static Image getImg() {
+		return img;
+	}
+
+	public void setImg(Image img) {
+		Object.img = img;
+	}
 
 }
