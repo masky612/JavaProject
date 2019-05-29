@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class BreakableWalls extends Object {
+public class BreakableWalls extends Cave {
 	public BreakableWalls(final int x, final int y, BufferedImage img){
 		this.setY(y);
         this.setX(x);

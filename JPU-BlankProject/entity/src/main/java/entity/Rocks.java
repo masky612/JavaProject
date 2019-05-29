@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Rocks extends Object {
+public class Rocks extends Cave {
 	public Rocks(final int x, final int y, BufferedImage img){
 		this.setY(y);
         this.setX(x);

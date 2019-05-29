@@ -88,7 +88,7 @@ public final class Controller implements IController {
 				break;
 			case map5:
 				this.model.loadHelloWorld(5);
-			case up:
+			/*case up:
 				this.view.movePlayer(x, y);
 				break;
 			case down:
@@ -99,7 +99,7 @@ public final class Controller implements IController {
 				break;
 			case right:
 				this.view.movePlayer(x, y);
-				break;
+				break;*/
 				
 			default:
 				break;

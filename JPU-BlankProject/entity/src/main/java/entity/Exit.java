@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Exit extends Object {
+public class Exit extends Cave {
 	public Exit(final int x, final int y, BufferedImage img){
 		this.setY(y);
         this.setX(x);

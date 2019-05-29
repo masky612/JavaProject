@@ -89,4 +89,10 @@ public final class View implements IView, Runnable {
 	public void setController(final IController controller) {
 		this.viewFrame.setController(controller);
 	}
+
+	@Override
+	public void movePlayer(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
 }

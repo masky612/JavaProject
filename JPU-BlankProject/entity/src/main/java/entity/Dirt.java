@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Dirt extends Object {
+public class Dirt extends Cave {
 	public Dirt(final int x, final int y, BufferedImage img){
 		this.setY(y);
         this.setX(x);

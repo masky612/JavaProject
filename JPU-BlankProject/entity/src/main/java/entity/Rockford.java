@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Rockford {
+public class Rockford extends Cave {
 	
 	
 

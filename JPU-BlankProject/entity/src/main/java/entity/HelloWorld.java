@@ -97,7 +97,7 @@ public class HelloWorld extends Entity {
 		this.message = message;
 	}
 
-	public HashMap<Point, String> createMap() {
+	public HashMap<Point,Cave> createMap() {
 		/*String[] chaineMap = this.getMessage().split(",");
 		HashMap<Point, String> map = new HashMap<Point, String>();
 		int x = 0;
@@ -116,7 +116,7 @@ public class HelloWorld extends Entity {
 		return map;*/
 		
 		String chaineMap = this.getMessage();
-		HashMap<Point, String> map = new HashMap<Point, String>();
+		HashMap<Point, Cave> map = new HashMap<Point, Cave>();
 		int x = 0;
 		int y = 0;
 		char sprite;
@@ -128,18 +128,18 @@ public class HelloWorld extends Entity {
 				y+=32;
 				x = 0;
 				spriteStr= String.valueOf(sprite);
-				//Object obj = Object.getObjFromSpriteStr(spriteStr, x, y);
-				map.put(new Point(x, y), spriteStr);
-				//System.out.println("i'm if");	
+				Cave obj = Cave.getObjFromSpriteStr(spriteStr, x, y);
+				map.put(new Point(obj.getX(),obj.getY()), obj);
+				System.out.println("i'm if");	
 			} else {
 				spriteStr= ""+sprite;
-				//Object obj = Object.getObjFromSpriteStr(spriteStr, x, y);
-				map.put(new Point(x, y), spriteStr);	
+				Cave obj = Cave.getObjFromSpriteStr(spriteStr, x, y);
+				map.put(new Point(obj.getX(),obj.getY()), obj);	
 				x+=32;
 				//System.out.println("my sprite: " + spriteStr);	
 			}
-			
 		}
+		
 		/*Set<Entry<Point, String>> setHm = map.entrySet();
 	      Iterator<Entry<Point, String>> it = setHm.iterator();
 	      while(it.hasNext()){

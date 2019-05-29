@@ -2,8 +2,8 @@ package entity;
 
 import java.awt.Image;
 
-public class Object {
-/*	protected boolean isBreakableByPlayer;
+public class Cave {
+	protected boolean isBreakableByPlayer;
 	protected boolean isBreakableByExplosion;
 	protected boolean isMovable;
 	protected boolean isAlive;
@@ -36,15 +36,15 @@ public class Object {
         this.img = img;
     }
 
-	public static Object getObjFromSpriteStr(String spriteStr, int x, int y) {
+	public static Cave getObjFromSpriteStr(String spriteStr, int x, int y) {
 		// TODO Auto-generated method stub
 		switch(spriteStr) {
 		case "U" :
 			return new Wall(x, y);
 		}
 		return null;
-	}*/
-	protected boolean isBreakableByPlayer;
+	}
+	/*protected boolean isBreakableByPlayer;
 	protected boolean isBreakableByExplosion;
 	protected boolean isMovable;
 	protected boolean isAlive;
@@ -75,7 +75,7 @@ public class Object {
 
 	public void setImg(Image img) {
 		Object.img = img;
-	}
+	}*/
 	
 
 }

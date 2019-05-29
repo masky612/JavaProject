@@ -1,6 +1,7 @@
 package view;
 import entity.Wall;
 import entity.BreakableWalls;
+import entity.Cave;
 import entity.Diamonds;
 import entity.Dirt;
 import entity.Exit;
@@ -84,7 +85,7 @@ class ViewPanel extends JPanel implements Observer {
     @Override
     protected void paintComponent(final Graphics graphics) {
         graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
-        BufferedImage img = null;
+        Image img = null;
         // BufferedImage img2 = null;
         /*
 		 * String[] message
@@ -95,7 +96,7 @@ class ViewPanel extends JPanel implements Observer {
 
        // HashMap<Point, Object> test = this.getViewFrame().getModel().getHelloWorld().createMap();
 
-        HashMap<Point, String> test = this.getViewFrame().getModel().getHelloWorld().createMap();
+        HashMap<Point, Cave> test = this.getViewFrame().getModel().getHelloWorld().createMap();
       
 	
        /* try {
@@ -114,19 +115,18 @@ class ViewPanel extends JPanel implements Observer {
             ex.printStackTrace();
         }*/
         
-        try {
-            Set<Entry<Point, String>> setHm = test.entrySet();
-            Iterator<Entry<Point, String>> it = setHm.iterator();
+       
+            Set<Entry<Point, Cave>> setHm = test.entrySet();
+            Iterator<Entry<Point, Cave>> it = setHm.iterator();
             while (it.hasNext()) {
-                Entry<Point, String> e = it.next();
-                img = replacePng(e.getValue(), e.getKey().x, e.getKey().y);
+                Entry<Point, Cave> e = it.next();
+                System.out.print(e.getValue());
+               img = e.getValue().getImg();
                 if (img != null) {
-                    graphics.drawImage(Wall.getImg(), Wall.getX(), Wall.getY(), 16, 16, null);
+                    graphics.drawImage(e.getValue().getImg(), e.getValue().getX(),e.getValue().getY(), 16, 16, null);
                 }
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+         
         
         
         /*graphics.clearRect(0, 0, this.getWidth(),
@@ -136,33 +136,33 @@ class ViewPanel extends JPanel implements Observer {
 
     }
 
-    public BufferedImage replacePng(String test,int x, int y) throws IOException {
+    /*public BufferedImage replacePng(Cave cave,int x, int y) throws IOException {
         BufferedImage img = null;
-        if ("U".equals(test)) {
+        if ("U".equals(cave)) {
             //System.out.println(e.getValue());
        	 img = ImageIO.read(new File("D:\\pictures\\sprites\\wall.png"));
 
-        }else if("D".equals(test)) {
+        }else if("D".equals(cave)) {
         	 img = ImageIO.read(new File("D:\\pictures\\sprites\\dirt.png"));
-        new Dirt(x,y,img);
+        new Dirt(getX(),getY(),img);
         }
-        else if("R".equals(test)) {
+        else if("R".equals(cave)) {
         	img = ImageIO.read(new File("D:\\pictures\\sprites\\rock.png"));
-            new Rocks(x,y,img);
+            new Rocks(getX(),getY(),img);
         }
-        else if("O".equals(test)) {
+        else if("O".equals(cave)) {
         	img = ImageIO.read(new File("D:\\pictures\\sprites\\diamond.png"));
-            new Diamonds(x,y,img);
+            new Diamonds(getX(),getY(),img);
         }
-        else if("E".equals(test)) {
+        else if("E".equals(cave)) {
         	img = ImageIO.read(new File("D:\\pictures\\sprites\\exit.png"));
-            new Exit(x,y,img);
+            new Exit(getX(),getY(),img);
         }
-        else if("B".equals(test)) {
+        else if("B".equals(cave)) {
         	img = ImageIO.read(new File("D:\\pictures\\sprites\\breakableWall.png"));
-            new BreakableWalls(x,y,img);
+            new BreakableWalls(getX(),getY(),img);
         }
         return img;
-    }
+    }*/
 
 }

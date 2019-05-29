@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Wall extends Object {
+public class Wall extends Cave {
 
 	public Wall(final int x, final int y) {
 		this.setY(y);
