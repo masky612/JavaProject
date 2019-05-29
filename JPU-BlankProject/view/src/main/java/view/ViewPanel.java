@@ -8,6 +8,7 @@ import entity.Exit;
 import entity.HelloWorld;
 import entity.Rocks;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -85,6 +86,8 @@ class ViewPanel extends JPanel implements Observer {
     @Override
     protected void paintComponent(final Graphics graphics) {
         graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(0,0,2000,2000);
         Image img = null;
         // BufferedImage img2 = null;
         /*
@@ -123,7 +126,7 @@ class ViewPanel extends JPanel implements Observer {
                 System.out.print(e.getValue());
                img = e.getValue().getImg();
                 if (img != null) {
-                    graphics.drawImage(e.getValue().getImg(), e.getValue().getX(),e.getValue().getY(), 16, 16, null);
+                    graphics.drawImage(e.getValue().getImg(), e.getValue().getX(),e.getValue().getY(), 32, 32, null);
                 }
             }
          

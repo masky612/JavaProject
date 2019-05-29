@@ -1,6 +1,7 @@
 package entity;
 
 import java.awt.Image;
+import java.io.IOException;
 
 public class Cave {
 	protected boolean isBreakableByPlayer;
@@ -41,18 +42,26 @@ public class Cave {
 		switch (spriteStr) {
 		case "U":
 			return new Wall(x, y);
-
 		case "D":
 			return new Dirt(x, y);
-
 		case "O":
 			return new Diamonds(x, y);
-
+		case "R":
+			return new Rocks(x, y);
 		case "C":
 			return new Clear(x, y);
-
+		case "E":
+			return new Exit(x, y);
+		case "M":
+			return new Monster(x, y);
+		case "B":
+			return new BreakableWalls(x, y);
+		case "S":
+			return new Rockford(x, y);
+		default :
+			return new Wall(x,y);
 		}
-		return null;
+		
 	}
 	/*
 	 * protected boolean isBreakableByPlayer; protected boolean

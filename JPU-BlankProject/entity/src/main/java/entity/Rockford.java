@@ -2,6 +2,7 @@ package entity;
 
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,13 +17,42 @@ public class Rockford extends Cave {
 	private Image imgLeft;
 	private Image imgRight;
 	
-	public Rockford(int x, int y) throws IOException {
+	public Rockford(int x, int y)  {
 		this.p = new Point(x, y);
-		this.imgUp = ImageIO.read(new File("D:\\images\\up.png"));
-		this.imgDown = ImageIO.read(new File("D:\\images\\down.png"));
-		this.imgLeft = ImageIO.read(new File("D:\\images\\left.png"));
-		this.imgRight = ImageIO.read(new File("D:\\images\\right.png"));
+		try {
+			this.imgUp = ImageIO.read(new File("D:\\images\\up.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.imgDown = ImageIO.read(new File("D:\\images\\down.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			this.imgLeft = ImageIO.read(new File("D:\\images\\left.png"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			this.imgRight = ImageIO.read(new File("D:\\images\\right.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			BufferedImage img = ImageIO.read(new File("D:\\images\\down.png"));
+			this.setImg(img);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
+	
 	private Point p;
 	public Point getP() {
 		return p;
