@@ -57,7 +57,7 @@ public class Cave {
 		case "B":
 			return new BreakableWalls(x, y);
 		case "S":
-			return new Rockford(x, y);
+			return new Rockford(x,y);
 		default :
 			return new Wall(x,y);
 		}
