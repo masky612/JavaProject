@@ -12,7 +12,7 @@ public class BreakableWalls extends Cave {
 		this.setY(y);
 		this.setX(x);
 		isBreakableByPlayer = false;
-		isBreakableByExplosion = false;
+		isBreakableByExplosion = true;
 		isMovable = false;
 		isAlive = true;
 

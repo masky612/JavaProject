@@ -11,8 +11,8 @@ public class Diamonds extends Cave {
 		this.setY(y);
 		this.setX(x);
 		isBreakableByPlayer = false;
-		isBreakableByExplosion = false;
-		isMovable = false;
+		isBreakableByExplosion = true;
+		isMovable = true;
 		isAlive = true;
 
 		try {

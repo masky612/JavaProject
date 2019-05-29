@@ -11,8 +11,8 @@ public class Dirt extends Cave {
 	public Dirt(final int x, final int y) {
 		this.setY(y);
 		this.setX(x);
-		isBreakableByPlayer = false;
-		isBreakableByExplosion = false;
+		isBreakableByPlayer = true;
+		isBreakableByExplosion = true;
 		isMovable = false;
 		isAlive = true;
 
