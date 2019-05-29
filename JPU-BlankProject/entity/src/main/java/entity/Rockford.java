@@ -18,10 +18,10 @@ public class Rockford extends Cave {
 	
 	public Rockford(int x, int y) throws IOException {
 		this.p = new Point(x, y);
-		this.imgUp = ImageIO.read(new File("D:pictures\\sprites\\up.png"));
-		this.imgDown = ImageIO.read(new File("D:pictures\\sprites\\down.png"));
-		this.imgLeft = ImageIO.read(new File("D:pictures\\sprites\\left.png"));
-		this.imgRight = ImageIO.read(new File("D:pictures\\sprites\\right.png"));
+		this.imgUp = ImageIO.read(new File("D:\\images\\up.png"));
+		this.imgDown = ImageIO.read(new File("D:\\images\\down.png"));
+		this.imgLeft = ImageIO.read(new File("D:\\images\\left.png"));
+		this.imgRight = ImageIO.read(new File("D:\\images\\right.png"));
 	}
 	private Point p;
 	public Point getP() {

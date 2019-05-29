@@ -129,12 +129,12 @@ public class HelloWorld extends Entity {
 				x = 0;
 				spriteStr= String.valueOf(sprite);
 				Cave obj = Cave.getObjFromSpriteStr(spriteStr, x, y);
-				map.put(new Point(obj.getX(),obj.getY()), obj);
-				System.out.println("i'm if");	
+				map.put(new Point(x,y), obj);
+				//System.out.println("i'm if");	
 			} else {
 				spriteStr= ""+sprite;
 				Cave obj = Cave.getObjFromSpriteStr(spriteStr, x, y);
-				map.put(new Point(obj.getX(),obj.getY()), obj);	
+				map.put(new Point(x,y), obj);	
 				x+=32;
 				//System.out.println("my sprite: " + spriteStr);	
 			}

@@ -17,7 +17,7 @@ public class Wall extends Cave {
 		isAlive = true;
 
 		try {
-			BufferedImage img = ImageIO.read(new File("D:\\pictures\\sprites\\wall.png"));
+			BufferedImage img = ImageIO.read(new File("D:\\images\\wall.png"));
 			this.setImg(img);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -25,7 +25,7 @@ public class Wall extends Cave {
 		}
 	}
 
-	public Wall(final int x, final int y, BufferedImage img) {
+	/*public Wall(final int x, final int y, BufferedImage img) {
 		this.setY(y);
 		this.setX(x);
 		isBreakableByPlayer = false;
@@ -41,5 +41,5 @@ public class Wall extends Cave {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 }
