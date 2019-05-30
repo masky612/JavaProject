@@ -9,10 +9,24 @@ public class Cave {
 	protected boolean isBreakableByExplosion;
 	protected boolean isMovable;
 	protected boolean isAlive;
+	protected boolean isClaimable = false;
+	protected boolean isDaWay = false;
 
 	protected int x;
 	protected int y;
 	private Image img;
+	
+	public boolean getDaWay() {
+		return isDaWay;
+	}
+	
+	public boolean getdestructP1() {
+		return isBreakableByPlayer ;
+	}
+	
+	public boolean getclaimedP1() {
+		return isClaimable ;
+	}
 
 	public int getX() {
 		return x;

@@ -15,7 +15,8 @@ public class Exit extends Cave {
 		isBreakableByExplosion = false;
 		isMovable = false;
 		isAlive = true;
-
+		isDaWay = true;
+				
 		try {
 			BufferedImage img = ImageIO.read(new File("D:\\images\\exit.png"));
 			this.setImg(img);
@@ -23,5 +24,6 @@ public class Exit extends Cave {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
 	}
 }

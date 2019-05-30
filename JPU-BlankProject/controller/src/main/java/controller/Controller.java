@@ -1,7 +1,10 @@
 package controller;
 
 import java.awt.Point;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -94,7 +97,6 @@ public final class Controller implements IController {
 		case up:
 			try {
 				
-				
 				this.view.movePlayer(Rockford.getInstance().getX(), Rockford.getInstance().getY(),ControllerOrder.up);
 			} catch (IOException ex) {
 				Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,7 +133,6 @@ public final class Controller implements IController {
 		 * this.view.movePlayer(x, y); break; case right: this.view.movePlayer(x, y);
 		 * break;
 		 */
-
 		default:
 			break;
 		}

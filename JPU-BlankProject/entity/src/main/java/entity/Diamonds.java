@@ -14,6 +14,7 @@ public class Diamonds extends Cave {
 		isBreakableByExplosion = true;
 		isMovable = true;
 		isAlive = true;
+		isClaimable = true;
 
 		try {
 			BufferedImage img = ImageIO.read(new File("D:\\images\\diamond.png"));
