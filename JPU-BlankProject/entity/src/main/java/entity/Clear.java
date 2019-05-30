@@ -13,7 +13,7 @@ public class Clear extends Cave {
 	public Clear(final int x, final int y) {
 		this.setY(y);
 		this.setX(x);
-		isBreakableByPlayer = false;
+		isBreakableByPlayer = true;
 		isBreakableByExplosion = false;
 		isMovable = false;
 		isAlive = true;

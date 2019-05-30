@@ -1,3 +1,4 @@
+
 package view;
 
 import entity.Wall;
@@ -41,6 +42,13 @@ class ViewPanel extends JPanel implements Observer {
 	 * The view frame.
 	 */
 	private ViewFrame viewFrame;
+	
+	int Px;
+	int Py;
+	boolean checkvalue;
+	int score = 0;
+	int diamondValue = 20;
+	int levelExitScore = 60;
 
 	private HashMap<Point, Cave> test = new HashMap<>();
 	/**
@@ -119,15 +127,44 @@ class ViewPanel extends JPanel implements Observer {
 	}
 	
 
+	
+	public void hitbox(int x, int y, int Px , int Py) {	
+		Cave targetitem = test.get(new Point(x + Px, y + Py));
+		boolean destructablebyPlayer = targetitem.getdestructP1();
+		boolean claimablebyPlayer = targetitem.getclaimedP1();
+		boolean thisIsDaWay = targetitem.getDaWay();
+		if ( claimablebyPlayer == true){
+			checkvalue = true;
+			score = score + diamondValue ;
+			System.out.println(" ur curent score is " + score);
+		
+		}
+		else if ( destructablebyPlayer == true){
+			checkvalue = true;
+		} 
+		else if ( thisIsDaWay == true && score >= levelExitScore ) {
+			checkvalue = true;
+			System.out.println("Weal Played U Won");
+		}
+		else {
+			checkvalue = false;
+		}
+		/*if ( claimablebyPlayer == true){
+			checkvalue = true;
+			score ++ ;
+			System.out.println(" ur curent score is ");
+		}*/
+	}
 
-	
-	
 	
 	public void movePlayer(int x, int y, ControllerOrder co) throws IOException {
 		Graphics graphics = this.getGraphics();
 		switch (co) {
 		case up:
-
+			Px = 0;
+			Py = -32;
+			hitbox( x,  y,  Px,  Py);
+			if (checkvalue == true) {
 			// update rockford;
 			Rockford.getInstance().setP(new Point(x, y - 32));
 			Rockford.getInstance().setY(y - 32);
@@ -138,10 +175,15 @@ class ViewPanel extends JPanel implements Observer {
 			// update clear;
 			graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
 			test.replace(new Point(x, y), new Clear(x, y));
+			}
+			checkvalue = false;
 			break;
-
+			
 		case right:
-			// if chech
+			Px = +32;
+			Py = 0;
+			hitbox( x,  y,  Px,  Py);
+			if (checkvalue == true) {
 			// update rockford;
 			Rockford.getInstance().setP(new Point(x + 32, y));
 			Rockford.getInstance().setX(x + 32);
@@ -152,10 +194,15 @@ class ViewPanel extends JPanel implements Observer {
 			// update clear;
 			graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
 			test.replace(new Point(x, y), new Clear(x, y));
+			}
+			checkvalue = false;
 			break;
 
 		case down:
-
+			Px = 0;
+			Py = 0 + 32;
+			hitbox( x,  y,  Px,  Py);
+			if (checkvalue == true) {
 			// update rockford;
 			Rockford.getInstance().setP(new Point(x, y + 32));
 			Rockford.getInstance().setY(y + 32);
@@ -166,9 +213,15 @@ class ViewPanel extends JPanel implements Observer {
 			// update clear;
 			graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
 			test.replace(new Point(x, y), new Clear(x, y));
+			}
+			checkvalue = false;
 			break;
+			
 		case left:
-			// if chech
+			Px = 0 -32;
+			Py = 0;
+			hitbox( x,  y,  Px,  Py);
+			if (checkvalue == true) {
 			// update rockford;
 			Rockford.getInstance().setP(new Point(x - 32, y));
 			Rockford.getInstance().setX(x - 32);
@@ -179,6 +232,8 @@ class ViewPanel extends JPanel implements Observer {
 			// update clear;
 			graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
 			test.replace(new Point(x, y), new Clear(x, y));
+			}
+			checkvalue = false;
 			break;
 
 		default:
