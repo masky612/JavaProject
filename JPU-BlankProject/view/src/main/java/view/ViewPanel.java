@@ -101,9 +101,10 @@ class ViewPanel extends JPanel implements Observer {
 			test = this.getViewFrame().getModel().getHelloWorld().createMap();
 			Set<Entry<Point, Cave>> setHm = test.entrySet();
 			Iterator<Entry<Point, Cave>> it = setHm.iterator();
+			
 			while (it.hasNext()) {
 				Entry<Point, Cave> e = it.next();
-				System.out.print(e.getValue());
+				//System.out.print(e.getValue());
 				img = e.getValue().getImg();
 				if (img != null) {
 					graphics.drawImage(e.getValue().getImg(), e.getValue().getX(), e.getValue().getY(), 32, 32, null);
@@ -116,7 +117,12 @@ class ViewPanel extends JPanel implements Observer {
 		}
 
 	}
+	
 
+
+	
+	
+	
 	public void movePlayer(int x, int y, ControllerOrder co) throws IOException {
 		Graphics graphics = this.getGraphics();
 		switch (co) {
