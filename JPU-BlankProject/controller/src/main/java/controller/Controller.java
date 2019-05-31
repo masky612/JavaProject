@@ -129,6 +129,7 @@ public final class Controller implements IController {
 				Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
 			}
 			break;
+		
 		/*
 		 * case down: this.view.movePlayer(x, y); break; case left:
 		 * this.view.movePlayer(x, y); break; case right: this.view.movePlayer(x, y);

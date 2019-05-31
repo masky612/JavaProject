@@ -5,13 +5,18 @@
 package main;
 
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 
 import contract.ControllerOrder;
 import controller.Controller;
 import entity.Cave;
+import entity.Clear;
 import model.Model;
 import view.View;
+
+
 
 
 
@@ -21,8 +26,9 @@ import view.View;
  *
  * @author Jean-Aymeric Diet
  */
-public abstract class Main{
+public abstract class Main {
 
+ 
     /**
      * The main method.
      *
@@ -30,8 +36,10 @@ public abstract class Main{
      *            the arguments
      */
 
+
 	
     public static void main(final String[] args) {
+    	
         final Model model = new Model();
         final View view = new View(model);
         final Controller controller = new Controller(view, model);
@@ -40,6 +48,7 @@ public abstract class Main{
         controller.control();
         controller.orderPerform(ControllerOrder.map1);
         
+
  
     }
 }
