@@ -16,6 +16,8 @@ public class Exit extends Cave {
 		isMovable = false;
 		isAlive = true;
 		isDaWay = true;
+		isanexplosableentity = false;
+		
 				
 		try {
 			BufferedImage img = ImageIO.read(new File("D:\\images\\exit.png"));

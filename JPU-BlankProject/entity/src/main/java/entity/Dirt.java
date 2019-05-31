@@ -15,6 +15,8 @@ public class Dirt extends Cave {
 		isBreakableByExplosion = true;
 		isMovable = false;
 		isAlive = true;
+		isanexplosableentity = false;
+		
 
 		try {
 			BufferedImage img = ImageIO.read(new File("D:\\images\\dirt.png"));

@@ -1,4 +1,5 @@
 package entity;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,9 @@ public class Diamonds extends Cave {
 		isAlive = true;
 		isClaimable = true;
 		canfall = true;
+		canfallkill = false;
+		isanexplosableentity = false;
+		
 		
 		try {
 			BufferedImage img = ImageIO.read(new File("D:\\images\\diamond.png"));
@@ -25,4 +29,16 @@ public class Diamonds extends Cave {
 			e.printStackTrace();
 		}
 	}
+	
+	public static Image getImage() {
+		
+		try {
+			return ImageIO.read(new File("D:\\images\\diamond.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	
+}
 }

@@ -15,6 +15,11 @@ public class Monster extends Cave {
 		isBreakableByExplosion = true;
 		isMovable = true;
 		isAlive = true;
+		isAMonster = true;
+		wasGoingLeft = false;
+		wasGoingRight = false;
+		wasGoingUp = false;
+		wasGoingDown = false;
 
 		try {
 			BufferedImage img = ImageIO.read(new File("D:\\images\\monster.png"));
@@ -24,4 +29,5 @@ public class Monster extends Cave {
 			e.printStackTrace();
 		}
 	}
+	
 }
