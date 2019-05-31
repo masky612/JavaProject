@@ -1,4 +1,3 @@
-
 package view;
 
 import entity.Wall;
@@ -21,6 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
@@ -36,8 +36,8 @@ import contract.ControllerOrder;
  *
  * @author Jean-Aymeric Diet
  */
-class ViewPanel extends JPanel implements Observer {
-
+public class ViewPanel extends JPanel implements Observer {
+		 
 	/**
 	 * The view frame.
 	 */
@@ -48,9 +48,11 @@ class ViewPanel extends JPanel implements Observer {
 	boolean checkvalue;
 	int score = 0;
 	int diamondValue = 20;
-	int levelExitScore = 60;
-
-	private HashMap<Point, Cave> test = new HashMap<>();
+	int levelExitScore = 250;
+		 
+	public  HashMap<Point, Cave> test = new HashMap<>();
+	
+		
 	/**
 	 * The Constant serialVersionUID.
 	 */
@@ -124,9 +126,45 @@ class ViewPanel extends JPanel implements Observer {
 		}
 
 	}
+	
+	public void itemGravity() {
+		int testx = 32*29, testy = 32*29;
+		//int mapsize = 32*30;
+		
+		while (testy >= 0) {
+			
+		while (testx >= 0) {
+			Cave targettestblock = test.get(new Point(testx ,testy));
+			boolean itemcantfly = targettestblock.getcanfall();
+			if (itemcantfly == true) {
+				Cave undertest = test.get(new Point(testx ,testy + 32));
+				boolean underitemcantfly = undertest.getisfull();
+				if (underitemcantfly == false) {
+					
+					Graphics graphics = this.getGraphics();
+					targettestblock.setP(new Point(testx, testy + 32));
+					targettestblock.setY(testy + 32);
+					Image img = targettestblock.getImg();
+					graphics.drawImage(img, testx, testy + 32, 32, 32, null);
+					test.replace(new Point(testx, testy + 32), targettestblock);
+
+					// update clear;
+					graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
+					test.replace(new Point(testx, testy), new Clear(testx, testy));
+				}
+			}
+			testx =testx - 32;
+			
+		}
+		testx = 32*29;
+		testy =testy - 32;
+	}
+	}
+	
 
 	
 	public void hitbox(int x, int y, int Px , int Py) {	
+		itemGravity();
 		Cave targetitem = test.get(new Point(x + Px, y + Py));
 		boolean destructablebyPlayer = targetitem.getdestructP1();
 		boolean claimablebyPlayer = targetitem.getclaimedP1();
