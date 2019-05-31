@@ -23,6 +23,7 @@ public class Rocks extends Cave {
 		canfall = true;
 		canfallkill = false;
 		isanexplosableentity = false;
+		cancascade = true;
 		
 		try {
 			BufferedImage img = ImageIO.read(new File("D:\\images\\rock.png"));

@@ -19,6 +19,7 @@ public class Diamonds extends Cave {
 		canfall = true;
 		canfallkill = false;
 		isanexplosableentity = false;
+		cancascade = true;
 		
 		
 		try {

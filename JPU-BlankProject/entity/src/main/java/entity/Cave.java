@@ -10,6 +10,7 @@ public class Cave {
 	protected boolean isMovable;
 	protected boolean isfull = true;
 	protected boolean canfall = false;
+	protected boolean cancascade = false;
 	protected boolean isAlive;
 	protected boolean isClaimable = false;
 	protected boolean isDaWay = false;
@@ -29,7 +30,9 @@ public class Cave {
 	public Point getP() {
 		return p;
 	}
-
+	public boolean getcancascade() {
+		return cancascade;
+	}
 	public void setP(Point p) {
 		this.p = p;
 	}
