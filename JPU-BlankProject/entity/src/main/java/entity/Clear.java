@@ -17,6 +17,7 @@ public class Clear extends Cave {
 		isBreakableByExplosion = false;
 		isMovable = false;
 		isAlive = true;
+		isfull = false;
 
 		try {
 			BufferedImage img = ImageIO.read(new File(CLEAR_PATH));

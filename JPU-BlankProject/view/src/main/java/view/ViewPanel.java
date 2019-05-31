@@ -1,4 +1,3 @@
-
 package view;
 
 import entity.Wall;
@@ -21,9 +20,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
@@ -36,8 +37,8 @@ import contract.ControllerOrder;
  *
  * @author Jean-Aymeric Diet
  */
-class ViewPanel extends JPanel implements Observer {
-
+public class ViewPanel extends JPanel implements Observer {
+		 
 	/**
 	 * The view frame.
 	 */
@@ -48,9 +49,30 @@ class ViewPanel extends JPanel implements Observer {
 	boolean checkvalue;
 	int score = 0;
 	int diamondValue = 20;
-	int levelExitScore = 60;
-
-	private HashMap<Point, Cave> test = new HashMap<>();
+	int levelExitScore = 250;
+	int startvalue = 0; // cette valeur permet l'initialisation du thread de gravité par l'appuis sur la touche entrée.
+		 
+	public static  HashMap<Point, Cave> test = new HashMap<>();
+	
+	
+	// ______________________________________ \\
+	// thread de gestion de la gravité \\
+	public class MyRunnable implements Runnable {
+		@Override
+		public void run() {
+			int i = 1;
+			while (i > 0) {
+			try {
+				TimeUnit.MILLISECONDS.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}	
+			itemGravity();
+			}
+		}
+	}
+ // -------------------------------------------- \\
+	
 	/**
 	 * The Constant serialVersionUID.
 	 */
@@ -125,7 +147,43 @@ class ViewPanel extends JPanel implements Observer {
 		}
 
 	}
+
+
+	public void itemGravity() {
+		int testx = 32*29, testy = 32*29;
+		
+		while (testy >= 0) {
+			
+		while (testx >= 0) {
+			Cave targettestblock = test.get(new Point(testx ,testy));
+			boolean itemcantfly = targettestblock.getcanfall();
+			if (itemcantfly == true) {
+				Cave undertest = test.get(new Point(testx ,testy + 32));
+				boolean underitemcantfly = undertest.getisfull();
+				if (underitemcantfly == false) {
+					
+					
+					targettestblock.setP(new Point(testx, testy + 32));
+					targettestblock.setY(testy + 32);
+					Image img = targettestblock.getImg();
+					Graphics graphics = this.getGraphics();
+					graphics.drawImage(img, testx, testy + 32, 32, 32, null);
+					test.replace(new Point(testx, testy + 32), targettestblock);
+
+					// update clear;
+					graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
+					test.replace(new Point(testx, testy), new Clear(testx, testy));
+				}
+			}
+			testx =testx - 32;
+		}
+		testx = 32*29;
+		testy =testy - 32;
+	}
+		
+	}
 	
+
 
 	
 	public void hitbox(int x, int y, int Px , int Py) {	
@@ -136,7 +194,7 @@ class ViewPanel extends JPanel implements Observer {
 		if ( claimablebyPlayer == true){
 			checkvalue = true;
 			score = score + diamondValue ;
-			System.out.println(" ur curent score is " + score);
+			System.out.println(" Your curent score is " + score);
 		
 		}
 		else if ( destructablebyPlayer == true){
@@ -145,15 +203,13 @@ class ViewPanel extends JPanel implements Observer {
 		else if ( thisIsDaWay == true && score >= levelExitScore ) {
 			checkvalue = true;
 			System.out.println("Weal Played U Won");
+			score = 0;
+			System.out.println(" Your curent score is " + score);
 		}
 		else {
 			checkvalue = false;
 		}
-		/*if ( claimablebyPlayer == true){
-			checkvalue = true;
-			score ++ ;
-			System.out.println(" ur curent score is ");
-		}*/
+		
 	}
 
 	
@@ -180,6 +236,12 @@ class ViewPanel extends JPanel implements Observer {
 			break;
 			
 		case right:
+			
+			if (startvalue != 1) {
+				Thread myThread = new Thread(new MyRunnable());
+		        myThread.start();
+		        startvalue = 1;
+			}
 			Px = +32;
 			Py = 0;
 			hitbox( x,  y,  Px,  Py);
@@ -235,7 +297,6 @@ class ViewPanel extends JPanel implements Observer {
 			}
 			checkvalue = false;
 			break;
-
 		default:
 			break;
 		}

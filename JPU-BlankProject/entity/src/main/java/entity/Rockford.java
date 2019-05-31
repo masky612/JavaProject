@@ -71,14 +71,7 @@ public class Rockford extends Cave {
 
 	
 	private Point p;
-	public Point getP() {
-		return p;
-	}
-
-	public void setP(Point p) {
-		this.p = p;
-	}
-
+	
 	public Image getImgUp() {
 		return imgUp;
 	}

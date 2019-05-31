@@ -8,6 +8,8 @@ public class Cave {
 	protected boolean isBreakableByPlayer;
 	protected boolean isBreakableByExplosion;
 	protected boolean isMovable;
+	protected boolean isfull = true;
+	protected boolean canfall = false;
 	protected boolean isAlive;
 	protected boolean isClaimable = false;
 	protected boolean isDaWay = false;
@@ -16,6 +18,21 @@ public class Cave {
 	protected int y;
 	private Image img;
 	
+	private Point p;
+	public Point getP() {
+		return p;
+	}
+
+	public void setP(Point p) {
+		this.p = p;
+	}
+	
+	public boolean getisfull() {
+		return isfull;
+	}
+	public boolean getcanfall() {
+		return canfall;
+	}
 	public boolean getDaWay() {
 		return isDaWay;
 	}
