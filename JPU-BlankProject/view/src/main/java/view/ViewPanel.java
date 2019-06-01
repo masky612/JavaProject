@@ -497,8 +497,7 @@ public class ViewPanel extends JPanel implements Observer {
 	public void pushTheRock(int x, int y,int Px) throws IOException {
 		Graphics graphics = this.getGraphics();
 		Cave targetitem = test.get(new Point(x + Px, y));
-		boolean pushtherock = targetitem.getcanfall();
-		if (pushtherock == true) {
+		if (targetitem.getcanfall() == true && targetitem.getclaimedP1() == false) {
 			Cave afterrock = test.get(new Point(x+Px+Px,y));
 			if (afterrock.getisfull() == false) {
 				
