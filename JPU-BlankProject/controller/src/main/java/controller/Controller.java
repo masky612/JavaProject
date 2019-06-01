@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.Point;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -14,7 +15,6 @@ import contract.IController;
 import contract.IModel;
 import contract.IView;
 import entity.Rockford;
-
 /**
  * The Class Controller.1234
  */
@@ -25,6 +25,7 @@ public final class Controller implements IController {
 
 	/** The model. */
 	private IModel model;
+	public boolean gameStart = false;
 
 	/**
 	 * Instantiates a new controller.
@@ -46,7 +47,7 @@ public final class Controller implements IController {
 	 * @see contract.IController#control()
 	 */
 	public void control() {
-		this.view.printMessage("Appuyer sur les touches 'a', 'z', 'e', 'r' ou 't', pour afficher le niveaux que vous voulez.");
+		this.view.printMessage("Press key 'a', 'z', 'e', 'r' or 't', to chose your level, once you move the game is lauched amd you cant change anymore.");
 	}
 	
 
@@ -79,6 +80,7 @@ public final class Controller implements IController {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
+		if (gameStart == false ) {
 		switch (controllerOrder) {
 		case map1:
 			this.model.loadHelloWorld(1);
@@ -95,8 +97,13 @@ public final class Controller implements IController {
 		case map5:
 			this.model.loadHelloWorld(5);
 			break;
+		}
+		}switch (controllerOrder) {
 		case up:
 			try {
+				if (gameStart == false) {
+					gameStart = true;
+				}
 				
 				this.view.movePlayer(Rockford.getInstance().getX(), Rockford.getInstance().getY(),ControllerOrder.up);
 			} catch (IOException ex) {
@@ -105,6 +112,9 @@ public final class Controller implements IController {
 			break;
 		case right:
 			try {
+				if (gameStart == false) {
+					gameStart = true;
+				}
 				
 				this.view.movePlayer(Rockford.getInstance().getX(), Rockford.getInstance().getY() ,ControllerOrder.right);
 			} catch (IOException ex) {
@@ -113,7 +123,9 @@ public final class Controller implements IController {
 			break;
 		case down:
 			try {
-				
+				if (gameStart == false) {
+					gameStart = true;
+				}
 				
 				this.view.movePlayer(Rockford.getInstance().getX(), Rockford.getInstance().getY(),ControllerOrder.down);
 			} catch (IOException ex) {
@@ -122,7 +134,9 @@ public final class Controller implements IController {
 			break;
 		case left:
 			try {
-				
+				if (gameStart == false) {
+					gameStart = true;
+				}
 				
 				this.view.movePlayer(Rockford.getInstance().getX(), Rockford.getInstance().getY(),ControllerOrder.left);
 			} catch (IOException ex) {
@@ -141,3 +155,4 @@ public final class Controller implements IController {
 	}
 
 }
+
