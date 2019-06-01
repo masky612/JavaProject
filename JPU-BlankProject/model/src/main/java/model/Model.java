@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.Observable;
 
 import contract.IModel;
-import entity.HelloWorld;
+import entity.Level;
 
 /**
  * The Class Model.
@@ -13,14 +13,14 @@ import entity.HelloWorld;
  */
 public final class Model extends Observable implements IModel {
 
-	/** The helloWorld. */
-	private HelloWorld helloWorld;
+	/** The level. */
+	private Level level;
 
 	/**
 	 * Instantiates a new model.
 	 */
 	public Model() {
-		this.helloWorld = new HelloWorld();
+		this.level = new Level();
 	}
 
 	/**
@@ -33,18 +33,18 @@ public final class Model extends Observable implements IModel {
 	 *
 	 * @see contract.IModel#getMessage()
 	 */
-	public HelloWorld getHelloWorld() {
-		return this.helloWorld;
+	public Level getLevel() {
+		return this.level;
 	}
 
 	/**
      * Sets the hello world.
      *
-     * @param helloWorld
+     * @param level
      *            the new hello world
      */
-	private void setHelloWorld(final HelloWorld helloWorld) {
-		this.helloWorld = helloWorld;
+	private void setLevel(final Level level) {
+		this.level = level;
 		this.setChanged();
 		this.notifyObservers();
 	}
@@ -60,10 +60,10 @@ public final class Model extends Observable implements IModel {
 	 *
 	 * @see contract.IModel#getMessage(java.lang.String)
 	 */
-	public void loadHelloWorld(final int code) {
+	public void loadLevel(final int code) {
 		try {
-			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-			this.setHelloWorld(daoHelloWorld.find(code));
+			final DAOLevel daoLevel = new DAOLevel(DBConnection.getInstance().getConnection());
+			this.setLevel(daoLevel.find(code));
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}

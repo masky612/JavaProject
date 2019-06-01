@@ -2,7 +2,7 @@ package contract;
 
 import java.util.Observable;
 
-import entity.HelloWorld;
+import entity.Level;
 
 /**
  * The Interface IModel.
@@ -16,7 +16,7 @@ public interface IModel {
 	 *
 	 * @return the helloworld entity
 	 */
-	HelloWorld getHelloWorld();
+	Level getLevel();
 
 	/**
 	 * Load the message.
@@ -24,7 +24,7 @@ public interface IModel {
 	 * @param i
 	 *          the code
 	 */
-	void loadHelloWorld(int i);
+	void loadLevel(int i);
 
 	/**
 	 * Gets the observable.

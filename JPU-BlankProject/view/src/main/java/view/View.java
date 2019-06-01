@@ -42,15 +42,15 @@ public final class View implements IView, Runnable {
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
-			case KeyEvent.VK_A:
+			case KeyEvent.VK_NUMPAD1:
 				return ControllerOrder.map1;
-			case KeyEvent.VK_Z:
+			case KeyEvent.VK_NUMPAD2:
 				return ControllerOrder.map2;
-			case KeyEvent.VK_E:
+			case KeyEvent.VK_NUMPAD3:
 				return ControllerOrder.map3;
-			case KeyEvent.VK_R:
+			case KeyEvent.VK_NUMPAD4:
 				return ControllerOrder.map4;
-			case KeyEvent.VK_T:
+			case KeyEvent.VK_NUMPAD5:
 				return ControllerOrder.map5;
 			case KeyEvent.VK_UP:
 				return ControllerOrder.up;
