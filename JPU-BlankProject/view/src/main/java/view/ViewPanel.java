@@ -474,7 +474,7 @@ public class ViewPanel extends JPanel implements Observer {
 			Font font = new Font("Courier", Font.BOLD, 20);
 		    g.setFont(font);
 		    g.setColor(Color.white);          
-		    g.drawString(" Your curent score is " + score, 1000, 250); 
+		    g.drawString(" Your curent score is " + score, 1000, 200); 
 		    g.drawString ("Goal Score = " + levelExitScore, 1000, 350);
 			//System.out.println(" Your curent score is " + score);
 		
