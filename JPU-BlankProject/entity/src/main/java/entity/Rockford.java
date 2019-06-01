@@ -13,12 +13,14 @@ import javax.imageio.ImageIO;
 public class Rockford extends Cave {
 	
 	
+	
 
 	private Image imgUp;
 	private Image imgDown;
 	private Image imgLeft;
 	private Image imgRight;
 	private static Rockford INSTANCE = null;
+	
 	
 	public static synchronized Rockford getInstance() throws IOException {
 		if (Rockford.INSTANCE == null) {
@@ -71,7 +73,6 @@ public class Rockford extends Cave {
 
 	
 	private Point p;
-	
 	public Image getImgUp() {
 		return imgUp;
 	}

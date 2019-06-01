@@ -15,6 +15,8 @@ public class Wall extends Cave {
 		isBreakableByExplosion = false;
 		isMovable = false;
 		isAlive = true;
+		isanexplosableentity = false;
+		
 
 		try {
 			BufferedImage img = ImageIO.read(new File("D:\\images\\wall.png"));

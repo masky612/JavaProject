@@ -10,9 +10,17 @@ public class Cave {
 	protected boolean isMovable;
 	protected boolean isfull = true;
 	protected boolean canfall = false;
+	protected boolean cancascade = false;
 	protected boolean isAlive;
 	protected boolean isClaimable = false;
 	protected boolean isDaWay = false;
+	protected boolean canfallkill = false;
+	protected boolean isanexplosableentity = true;
+	protected boolean isAMonster = false;
+	protected boolean wasGoingLeft = false;
+	protected boolean wasGoingRight = false;
+	protected boolean wasGoingUp = false;
+	protected boolean wasGoingDown = false;
 
 	protected int x;
 	protected int y;
@@ -22,11 +30,51 @@ public class Cave {
 	public Point getP() {
 		return p;
 	}
-
+	public boolean getcancascade() {
+		return cancascade;
+	}
 	public void setP(Point p) {
 		this.p = p;
 	}
-	
+	public boolean getisAMonster() {
+		return isAMonster;
+	}
+	public boolean getgoLeft() {
+		return wasGoingLeft;
+	}
+	public void setgoLeft(boolean wasGoingLeft) {
+		this.wasGoingLeft = wasGoingLeft;
+	}
+	public boolean getgoRight() {
+		return wasGoingRight;
+	}
+	public void setgoRight(boolean wasGoingRight) {
+		this.wasGoingRight = wasGoingRight;
+	}
+	public boolean getgoUp() {
+		return wasGoingUp;
+	}
+	public void setgoUp(boolean wasGoingUp) {
+		this.wasGoingUp = wasGoingUp;
+	}
+	public boolean getgoDown() {
+		return wasGoingDown;
+	}
+	public void setgoDown(boolean wasGoingDown) {
+		this.wasGoingDown = wasGoingDown;
+	}
+	public boolean getisBreakableByExplosion() {
+		return isBreakableByExplosion;
+	}
+	public boolean getisanexplosableentity() {
+		return isanexplosableentity;
+	}	
+	public void setcanfallkill(boolean canfallkill) {
+		this.canfallkill = canfallkill;
+	}
+	public boolean getcanfallkill() {
+		return canfallkill;
+	}
 	public boolean getisfull() {
 		return isfull;
 	}
