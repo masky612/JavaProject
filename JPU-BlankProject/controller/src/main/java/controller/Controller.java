@@ -46,9 +46,9 @@ public final class Controller implements IController {
 	 * @see contract.IController#control()
 	 */
 	public void control() {
-		this.view.printMessage(
-				"Appuyer sur les touches '1', '2', '3' ou '4', pour afficher le niveaux que vous voulez.");
+		this.view.printMessage("Appuyer sur les touches 'a', 'z', 'e', 'r' ou 't', pour afficher le niveaux que vous voulez.");
 	}
+	
 
 	/**
 	 * Sets the view.

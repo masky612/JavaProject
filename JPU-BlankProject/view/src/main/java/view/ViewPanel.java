@@ -12,6 +12,7 @@ import entity.Rockford;
 import entity.Rocks;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -43,7 +44,8 @@ public class ViewPanel extends JPanel implements Observer {
 	 * The view frame.
 	 */
 	private ViewFrame viewFrame;
-	
+	public boolean death = false;
+	public boolean won =false;
 	int Px;
 	int Py;
 	boolean checkvalue;
@@ -175,9 +177,7 @@ public class ViewPanel extends JPanel implements Observer {
 		}
 
 	}
-<<<<<<< HEAD
 
-=======
 	
 	// 11111111111111111111111111111111111111111111111111111111111111
 	//333333333333333333333333333DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
@@ -185,10 +185,13 @@ public class ViewPanel extends JPanel implements Observer {
 	
 	//deso pr le spam XD c juste pr être sur que vs voyer bien les message 
 	public void lose() {
-		System.out.println("u lose");
+		viewFrame.printMessage("you lose");
+		System.exit(0);
+
 	}
-	public void win() {
-		System.out.println("u won");
+	public void win(int score) {
+		viewFrame.printMessage("you win with "+score+" point");
+		System.exit(0);
 	}
 	
 	//   /!\ win et lose c pr vous les gars je redirige dessus dés qu'on gagne ou perd vs avez juste a gerer l'interface et fermant les fenetre et en ramenant au menu avec un petit message.
@@ -247,11 +250,12 @@ public class ViewPanel extends JPanel implements Observer {
 		//zone explosion 
 		//tuer le joueur
 		if (playerx == explodeX && playery == explodeY + 32) {
+			
 			lose();
 		}
-		System.out.println("boom");
+		//System.out.println("boom");
 	}
->>>>>>> refs/remotes/origin/VernierNicolas
+
 
 	public void itemGravity()throws IOException  {
 		int testx = 32*29, testy = 32*29;
@@ -462,7 +466,15 @@ public class ViewPanel extends JPanel implements Observer {
 		if ( claimablebyPlayer == true){
 			checkvalue = true;
 			score = score + diamondValue ;
-			System.out.println(" Your curent score is " + score);
+			Graphics g = this.getGraphics();
+			g.clearRect(1000, 180, 250,30);
+			g.setColor(Color.BLACK);
+			g.fillRect(1000, 180, 250, 30);
+			Font font = new Font("Courier", Font.BOLD, 20);
+		    g.setFont(font);
+		    g.setColor(Color.white);          
+		    g.drawString(" Your curent score is " + score, 1000, 200); 
+			//System.out.println(" Your curent score is " + score);
 		
 		}else if ( destructablebyPlayer == true){
 			checkvalue = true;
@@ -470,17 +482,15 @@ public class ViewPanel extends JPanel implements Observer {
 		
 		}else if ( thisIsDaWay == true && score >= levelExitScore ) {
 			checkvalue = true;
-			win();
+			win(score);
 			score = 0;
-			System.out.println(" Your curent score is " + score);
 		}
 		else {
 			checkvalue = false;
 		}
 		
 	}
-<<<<<<< HEAD
-=======
+
 	
 	public void pushTheRock(int x, int y,int Px) throws IOException {
 		Graphics graphics = this.getGraphics();
@@ -514,9 +524,7 @@ public class ViewPanel extends JPanel implements Observer {
 					
 				}
 	}
-							
-				
->>>>>>> refs/remotes/origin/VernierNicolas
+
 
 	
 	public void movePlayer(int x, int y, ControllerOrder co) throws IOException {

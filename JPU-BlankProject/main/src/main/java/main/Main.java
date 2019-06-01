@@ -15,7 +15,7 @@ import entity.Cave;
 import entity.Clear;
 import model.Model;
 import view.View;
-
+import view.ViewPanel;
 
 
 
@@ -44,9 +44,11 @@ public abstract class Main {
         final View view = new View(model);
         final Controller controller = new Controller(view, model);
         view.setController(controller);
-
+        
         controller.control();
         controller.orderPerform(ControllerOrder.map1);
+        
+        
         
 
  
