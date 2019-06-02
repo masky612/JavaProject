@@ -14,7 +14,7 @@ public class Clear extends Cave {
 		this.setY(y);
 		this.setX(x);
 		isBreakableByPlayer = true;
-		isBreakableByExplosion = false;
+		isBreakableByExplosion = true;
 		isMovable = false;
 		isAlive = true;
 		isfull = false;

@@ -306,6 +306,8 @@ public class ViewPanel extends JPanel implements Observer {
 						
 						graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
 						test.replace(new Point(testx, testy), new Clear(testx, testy));
+					}else {
+						targettestblock.setcanfallkill(false);
 					}
 				}else if ( undertest.getisanexplosableentity() == true  && targettestblock.getcanfallkill() == true) { //si un joueur ou monstre se trouve sous le block qui tombe alors explosion
 					int explodeY = targettestblock.getY();
