@@ -1,24 +1,10 @@
-/**
- * @author Jean-Aymeric DIET jadiet@cesi.fr
- * @version 1.0
- */
+
 package main;
-
-
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
 
 import contract.ControllerOrder;
 import controller.Controller;
-import entity.Cave;
-import entity.Clear;
 import model.Model;
 import view.View;
-import view.ViewPanel;
-
-
-
 
 
 /**

@@ -8,15 +8,15 @@ public class Cave {
 	protected boolean isBreakableByPlayer;
 	protected boolean isBreakableByExplosion;
 	protected boolean isMovable;
-	protected boolean isfull = true;
-	protected boolean canfall = false;
-	protected boolean cancascade = false;
+	protected boolean isFull = true;
+	protected boolean canFall = false;
+	protected boolean canCascade = false;
 	protected boolean isAlive;
 	protected boolean isClaimable = false;
 	protected boolean isDaWay = false;
-	protected boolean canfallkill = false;
-	protected boolean canpush = false;
-	protected boolean isanexplosableentity = true;
+	protected boolean canFallKill = false;
+	protected boolean canPush = false;
+	protected boolean isAnExplosableEntity = true;
 	protected boolean isAMonster = false;
 	protected boolean wasGoingLeft = false;
 	protected boolean wasGoingRight = false;
@@ -32,10 +32,10 @@ public class Cave {
 		return p;
 	}
 	public boolean getcancascade() {
-		return cancascade;
+		return canCascade;
 	}
 	public boolean getcanpush() {
-		return canpush;
+		return canPush;
 	}
 	public void setP(Point p) {
 		this.p = p;
@@ -71,19 +71,19 @@ public class Cave {
 		return isBreakableByExplosion;
 	}
 	public boolean getisanexplosableentity() {
-		return isanexplosableentity;
+		return isAnExplosableEntity;
 	}	
 	public void setcanfallkill(boolean canfallkill) {
-		this.canfallkill = canfallkill;
+		this.canFallKill = canfallkill;
 	}
 	public boolean getcanfallkill() {
-		return canfallkill;
+		return canFallKill;
 	}
 	public boolean getisfull() {
-		return isfull;
+		return isFull;
 	}
 	public boolean getcanfall() {
-		return canfall;
+		return canFall;
 	}
 	public boolean getDaWay() {
 		return isDaWay;

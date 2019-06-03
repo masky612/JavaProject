@@ -1,15 +1,9 @@
 package view;
 
-import entity.Wall;
-import entity.BreakableWalls;
 import entity.Cave;
 import entity.Clear;
 import entity.Diamonds;
-import entity.Dirt;
-import entity.Exit;
-import entity.Level;
 import entity.Rockford;
-import entity.Rocks;
 
 
 import java.awt.Color;
@@ -17,19 +11,15 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.Map.Entry;
 
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import contract.ControllerOrder;

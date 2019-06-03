@@ -15,7 +15,7 @@ public class Wall extends Cave {
 		isBreakableByExplosion = false;
 		isMovable = false;
 		isAlive = true;
-		isanexplosableentity = false;
+		isAnExplosableEntity = false;
 		
 
 		try {

@@ -15,7 +15,7 @@ public class Dirt extends Cave {
 		isBreakableByExplosion = true;
 		isMovable = false;
 		isAlive = true;
-		isanexplosableentity = false;
+		isAnExplosableEntity = false;
 		
 
 		try {

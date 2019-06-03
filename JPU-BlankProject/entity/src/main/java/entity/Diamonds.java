@@ -16,10 +16,10 @@ public class Diamonds extends Cave {
 		isMovable = true;
 		isAlive = true;
 		isClaimable = true;
-		canfall = true;
-		canfallkill = false;
-		isanexplosableentity = false;
-		cancascade = true;
+		canFall = true;
+		canFallKill = false;
+		isAnExplosableEntity = false;
+		canCascade = true;
 		
 		
 		try {

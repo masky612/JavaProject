@@ -16,7 +16,7 @@ public class Exit extends Cave {
 		isMovable = false;
 		isAlive = true;
 		isDaWay = true;
-		isanexplosableentity = false;
+		isAnExplosableEntity = false;
 		
 				
 		try {
