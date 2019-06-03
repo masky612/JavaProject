@@ -7,7 +7,7 @@ import entity.Clear;
 import entity.Diamonds;
 import entity.Dirt;
 import entity.Exit;
-import entity.HelloWorld;
+import entity.Level;
 import entity.Rockford;
 import entity.Rocks;
 
@@ -159,7 +159,7 @@ public class ViewPanel extends JPanel implements Observer {
 		Image img = null;
 
 		try {
-			test = this.getViewFrame().getModel().getHelloWorld().createMap();
+			test = this.getViewFrame().getModel().getLevel().createMap();
 			Set<Entry<Point, Cave>> setHm = test.entrySet();
 			Iterator<Entry<Point, Cave>> it = setHm.iterator();
 			
@@ -306,6 +306,8 @@ public class ViewPanel extends JPanel implements Observer {
 						
 						graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
 						test.replace(new Point(testx, testy), new Clear(testx, testy));
+					}else {
+						targettestblock.setcanfallkill(false);
 					}
 				}else if ( undertest.getisanexplosableentity() == true  && targettestblock.getcanfallkill() == true) { //si un joueur ou monstre se trouve sous le block qui tombe alors explosion
 					int explodeY = targettestblock.getY();
@@ -497,7 +499,7 @@ public class ViewPanel extends JPanel implements Observer {
 	public void pushTheRock(int x, int y,int Px) throws IOException {
 		Graphics graphics = this.getGraphics();
 		Cave targetitem = test.get(new Point(x + Px, y));
-		if (targetitem.getcanfall() == true && targetitem.getclaimedP1() == false) {
+		if (targetitem.getcanpush() == true) {
 			Cave afterrock = test.get(new Point(x+Px+Px,y));
 			if (afterrock.getisfull() == false) {
 				

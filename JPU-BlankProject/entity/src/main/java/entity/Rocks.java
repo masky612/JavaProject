@@ -22,6 +22,7 @@ public class Rocks extends Cave {
 		isAlive = true;
 		canfall = true;
 		canfallkill = false;
+		canpush = true;
 		isanexplosableentity = false;
 		cancascade = true;
 		

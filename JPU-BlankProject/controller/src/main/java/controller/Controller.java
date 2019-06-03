@@ -1,15 +1,9 @@
 package controller;
 
-import java.awt.Point;
 
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
@@ -47,7 +41,7 @@ public final class Controller implements IController {
 	 * @see contract.IController#control()
 	 */
 	public void control() {
-		this.view.printMessage("Press key 'a', 'z', 'e', 'r' or 't', to chose your level, once you move the game is lauched amd you cant change anymore.");
+		this.view.printMessage("Press key '1', '2', '3', '4' or '5', to chose your level, once you move the game is lauched amd you cant change anymore.");
 	}
 	
 
@@ -83,19 +77,21 @@ public final class Controller implements IController {
 		if (gameStart == false ) {
 		switch (controllerOrder) {
 		case map1:
-			this.model.loadHelloWorld(1);
+			this.model.loadLevel(1);
 			break;
 		case map2:
-			this.model.loadHelloWorld(2);
+			this.model.loadLevel(2);
 			break;
 		case map3:
-			this.model.loadHelloWorld(3);
+			this.model.loadLevel(3);
 			break;
 		case map4:
-			this.model.loadHelloWorld(4);
+			this.model.loadLevel(4);
 			break;
 		case map5:
-			this.model.loadHelloWorld(5);
+			this.model.loadLevel(5);
+			break;
+		default :
 			break;
 		}
 		}switch (controllerOrder) {

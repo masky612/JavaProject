@@ -15,6 +15,7 @@ public class Cave {
 	protected boolean isClaimable = false;
 	protected boolean isDaWay = false;
 	protected boolean canfallkill = false;
+	protected boolean canpush = false;
 	protected boolean isanexplosableentity = true;
 	protected boolean isAMonster = false;
 	protected boolean wasGoingLeft = false;
@@ -32,6 +33,9 @@ public class Cave {
 	}
 	public boolean getcancascade() {
 		return cancascade;
+	}
+	public boolean getcanpush() {
+		return canpush;
 	}
 	public void setP(Point p) {
 		this.p = p;
