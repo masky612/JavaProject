@@ -31,69 +31,69 @@ public class Cave {
 	public Point getP() {
 		return p;
 	}
-	public boolean getcancascade() {
+	public boolean getCanCascade() {
 		return canCascade;
 	}
-	public boolean getcanpush() {
+	public boolean getCanPush() {
 		return canPush;
 	}
 	public void setP(Point p) {
 		this.p = p;
 	}
-	public boolean getisAMonster() {
+	public boolean getIsAMonster() {
 		return isAMonster;
 	}
-	public boolean getgoLeft() {
+	public boolean getGoLeft() {
 		return wasGoingLeft;
 	}
-	public void setgoLeft(boolean wasGoingLeft) {
+	public void setGoLeft(boolean wasGoingLeft) {
 		this.wasGoingLeft = wasGoingLeft;
 	}
-	public boolean getgoRight() {
+	public boolean getGoRight() {
 		return wasGoingRight;
 	}
-	public void setgoRight(boolean wasGoingRight) {
+	public void setGoRight(boolean wasGoingRight) {
 		this.wasGoingRight = wasGoingRight;
 	}
-	public boolean getgoUp() {
+	public boolean getGoUp() {
 		return wasGoingUp;
 	}
-	public void setgoUp(boolean wasGoingUp) {
+	public void setGoUp(boolean wasGoingUp) {
 		this.wasGoingUp = wasGoingUp;
 	}
-	public boolean getgoDown() {
+	public boolean getGoDown() {
 		return wasGoingDown;
 	}
-	public void setgoDown(boolean wasGoingDown) {
+	public void setGoDown(boolean wasGoingDown) {
 		this.wasGoingDown = wasGoingDown;
 	}
-	public boolean getisBreakableByExplosion() {
+	public boolean getIsBreakableByExplosion() {
 		return isBreakableByExplosion;
 	}
-	public boolean getisanexplosableentity() {
+	public boolean getIsAnExplosableEntity() {
 		return isAnExplosableEntity;
 	}	
-	public void setcanfallkill(boolean canfallkill) {
-		this.canFallKill = canfallkill;
+	public void setCanFallKill(boolean canFallKill) {
+		this.canFallKill = canFallKill;
 	}
-	public boolean getcanfallkill() {
+	public boolean getCanFallKill() {
 		return canFallKill;
 	}
-	public boolean getisfull() {
+	public boolean getIsFull() {
 		return isFull;
 	}
-	public boolean getcanfall() {
+	public boolean getCanFall() {
 		return canFall;
 	}
 	public boolean getDaWay() {
 		return isDaWay;
 	}
 	
-	public boolean getdestructP1() {
+	public boolean getDestructP1() {
 		return isBreakableByPlayer ;
 	}
 	
-	public boolean getclaimedP1() {
+	public boolean getClaimedP1() {
 		return isClaimable ;
 	}
 

@@ -5,7 +5,6 @@ import entity.Clear;
 import entity.Diamonds;
 import entity.Rockford;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -24,76 +23,65 @@ import javax.swing.JPanel;
 
 import contract.ControllerOrder;
 
-/**
- * The Class ViewPanel.
- *
- * @author Jean-Aymeric Diet
- */
 public class ViewPanel extends JPanel implements Observer {
-		 
-	/**
-	 * The view frame.
-	 */
+
 	private ViewFrame viewFrame;
-	public boolean death = false;
-	public boolean won =false;
+
 	int Px;
 	int Py;
-	boolean checkvalue;
-	int score = 0;
-	int diamondValue = 20;
-	int levelExitScore = 250;
-	int startvalue = 0; // cette valeur permet l'initialisation du thread de gravité par l'appuis sur la touche entrée.
-		 
-	public static  HashMap<Point, Cave> test = new HashMap<>();
-	
-	
+	boolean checkValue;
+	int score = 0; // initialisation of the score
+	int diamondValue = 20; // set the global value of diamond
+	int levelExitScore = 250; // set the goal score to end a level
+	int startValue = 0; // permit to start the gravity thread
+
+	public static HashMap<Point, Cave> test = new HashMap<>();
+
 	// ______________________________________ \\
-	// thread de gestion de la gravité \\
+	// thread who permit to create gravity \\
 	public class MyRunnable implements Runnable {
 		@Override
 		public void run() {
 			int i = 1;
 			while (i > 0) {
-			try {
-				TimeUnit.MILLISECONDS.sleep(200); // fait varié la vitesse de chute des objets (plus le nombre est grand plus ils tombent lentement).
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}	
-			try {
-				itemGravity();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				try {
+					TimeUnit.MILLISECONDS.sleep(200); // pause the loop to reduce rock's fall speed
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				try {
+					itemGravity();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
- // -------------------------------------------- \\
-	
 	// ______________________________________ \\
-		// thread de gestion de la gravité \\
-		public class MyRunnableMonster implements Runnable {
-			@Override
-			public void run() {
-				int i = 1;
-				while (i > 0) {
+
+	// -------------------------------------- \\
+	// thread de gestion de la gravité \\
+	public class MyRunnableMonster implements Runnable {
+		@Override
+		public void run() {
+			int i = 1;
+			while (i > 0) {
 				try {
-					TimeUnit.MILLISECONDS.sleep(400); // fait varié la vitesse de chute des objets (plus le nombre est grand plus ils tombent lentement).
+					TimeUnit.MILLISECONDS.sleep(400); // pause the loop to reduce moster's movement speed
+													
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}	
-				try {
-					movementMonster();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
+				try {
+					movementMonster(); //call the monster movement fonction
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			}
 		}
-	 // -------------------------------------------- \\
-	
+	}
+	// -------------------------------------- \\
+
 	/**
 	 * The Constant serialVersionUID.
 	 */
@@ -142,9 +130,9 @@ public class ViewPanel extends JPanel implements Observer {
 	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 	 */
 	@Override
-	
-	//Creating the game map with objects
-	
+
+	// Creating the game map with objects
+
 	protected void paintComponent(final Graphics graphics) {
 		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 		graphics.setColor(Color.BLACK);
@@ -155,10 +143,10 @@ public class ViewPanel extends JPanel implements Observer {
 			test = this.getViewFrame().getModel().getLevel().createMap();
 			Set<Entry<Point, Cave>> setHm = test.entrySet();
 			Iterator<Entry<Point, Cave>> it = setHm.iterator();
-			
+
 			while (it.hasNext()) {
 				Entry<Point, Cave> e = it.next();
-				//System.out.print(e.getValue());
+				// System.out.print(e.getValue());
 				img = e.getValue().getImg();
 				if (img != null) {
 					graphics.drawImage(e.getValue().getImg(), e.getValue().getX(), e.getValue().getY(), 32, 32, null);
@@ -166,145 +154,146 @@ public class ViewPanel extends JPanel implements Observer {
 			}
 
 		} catch (IOException e1) {
-			
+
 			e1.printStackTrace();
 		}
 
 	}
 
-
 	public void lose() {
-		viewFrame.printMessage("you lose");
-		System.exit(0);
+		viewFrame.printMessage("you lose"); //open a window to print the lose message
+		System.exit(0); //kill the game
 
 	}
+
 	public void win(int score) {
-		viewFrame.printMessage("you win with "+score+" point");
-		System.exit(0);
+		viewFrame.printMessage("you win with " + score + " point"); //open a window to print the win message
+		System.exit(0); //kill the game
 	}
-	
-	
-	
-	public void explode(int explodeY, int explodeX) throws IOException {
+
+	public void explode(int explodeY, int explodeX) throws IOException { //clear every tile within the explosion radius
 		Graphics graphics = this.getGraphics();
-		int playerx = Rockford.getInstance().getX();	
-		int playery = Rockford.getInstance().getY();
+		int playerx = Rockford.getInstance().getX(); // get player's X coordinates
+		int playery = Rockford.getInstance().getY(); // get player's Y coordinates
+
+		if (test.get(new Point(explodeX, explodeY)).getIsBreakableByExplosion() == true) { //check if tile is breakable by explosion
+			graphics.drawImage(Clear.getImage(), explodeX, explodeY, 32, 32, null); // x and y get the value of tile's coordinates
+			test.replace(new Point(explodeX, explodeY), new Clear(explodeX, explodeY)); //erase tile
+		}
+		if (test.get(new Point(explodeX - 32, explodeY)).getIsBreakableByExplosion() == true) {
+			graphics.drawImage(Clear.getImage(), explodeX - 32, explodeY, 32, 32, null);
+			test.replace(new Point(explodeX - 32, explodeY), new Clear(explodeX - 32, explodeY));
+		}
+		if (test.get(new Point(explodeX + 32, explodeY)).getIsBreakableByExplosion() == true) {
+			graphics.drawImage(Clear.getImage(), explodeX + 32, explodeY, 32, 32, null);
+			test.replace(new Point(explodeX + 32, explodeY), new Clear(explodeX + 32, explodeY));
+		}
+		if (test.get(new Point(explodeX, explodeY + 32)).getIsBreakableByExplosion() == true) {
+			graphics.drawImage(Clear.getImage(), explodeX, explodeY + 32, 32, 32, null);
+			test.replace(new Point(explodeX, explodeY + 32), new Clear(explodeX, explodeY + 32));
+		}
+		if (test.get(new Point(explodeX + 32, explodeY + 32)).getIsBreakableByExplosion() == true) {
+			graphics.drawImage(Clear.getImage(), explodeX + 32, explodeY + 32, 32, 32, null);
+			test.replace(new Point(explodeX + 32, explodeY + 32), new Clear(explodeX + 32, explodeY + 32));
+		}
+		if (test.get(new Point(explodeX - 32, explodeY + 32)).getIsBreakableByExplosion() == true) {
+			graphics.drawImage(Clear.getImage(), explodeX - 32, explodeY + 32, 32, 32, null);
+			test.replace(new Point(explodeX - 32, explodeY + 32), new Clear(explodeX - 32, explodeY + 32));
+		}
+		if (test.get(new Point(explodeX, explodeY + 64)).getIsBreakableByExplosion() == true) {
+			graphics.drawImage(Clear.getImage(), explodeX, explodeY + 64, 32, 32, null);
+			test.replace(new Point(explodeX, explodeY + 64), new Clear(explodeX, explodeY + 64));
+		}
+		if (test.get(new Point(explodeX + 32, explodeY + 64)).getIsBreakableByExplosion() == true) {
+			graphics.drawImage(Diamonds.getImage(), explodeX + 32, explodeY + 64, 32, 32, null);
+			test.replace(new Point(explodeX + 32, explodeY + 64), new Diamonds(explodeX + 32, explodeY + 64));
+		}
+		if (test.get(new Point(explodeX - 32, explodeY + 64)).getIsBreakableByExplosion() == true) {
+			graphics.drawImage(Diamonds.getImage(), explodeX - 32, explodeY + 64, 32, 32, null);
+			test.replace(new Point(explodeX - 32, explodeY + 64), new Diamonds(explodeX - 32, explodeY + 64));
+		}
 		
-		if (test.get(new Point(explodeX ,explodeY)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Clear.getImage(), explodeX, explodeY, 32, 32, null);
-			test.replace(new Point(explodeX, explodeY), new Clear(explodeX, explodeY));
-		}
-		if (test.get(new Point(explodeX -32,explodeY)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Clear.getImage(), explodeX -32, explodeY, 32, 32, null);
-			test.replace(new Point(explodeX -32, explodeY), new Clear(explodeX -32, explodeY));
-		}
-		if (test.get(new Point(explodeX +32 ,explodeY)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Clear.getImage(), explodeX +32, explodeY, 32, 32, null);
-			test.replace(new Point(explodeX +32, explodeY), new Clear(explodeX +32, explodeY));
-		}
-		if (test.get(new Point(explodeX ,explodeY +32)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Clear.getImage(), explodeX, explodeY +32, 32, 32, null);
-			test.replace(new Point(explodeX, explodeY +32), new Clear(explodeX, explodeY +32));
-		}
-		if (test.get(new Point(explodeX +32,explodeY +32)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Clear.getImage(), explodeX +32, explodeY +32, 32, 32, null);
-			test.replace(new Point(explodeX +32, explodeY +32), new Clear(explodeX +32, explodeY +32));
-		}
-		if (test.get(new Point(explodeX -32,explodeY +32)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Clear.getImage(), explodeX -32, explodeY +32, 32, 32, null);
-			test.replace(new Point(explodeX -32, explodeY +32), new Clear(explodeX -32, explodeY +32));
-		}
-		if (test.get(new Point(explodeX ,explodeY +64)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Clear.getImage(), explodeX, explodeY +64, 32, 32, null);
-			test.replace(new Point(explodeX, explodeY +64), new Clear(explodeX, explodeY +64));
-		}
-		if (test.get(new Point(explodeX +32,explodeY +64)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Diamonds.getImage(), explodeX +32, explodeY +64, 32, 32, null);
-			test.replace(new Point(explodeX +32, explodeY +64), new Diamonds(explodeX +32, explodeY +64));
-		}
-		if (test.get(new Point(explodeX -32,explodeY +64)).getisBreakableByExplosion() == true) {
-			graphics.drawImage(Diamonds.getImage(), explodeX -32, explodeY +64, 32, 32, null);
-			test.replace(new Point(explodeX -32, explodeY +64), new Diamonds(explodeX -32, explodeY +64));
-		}
-		//zone explosion 
-		//tuer le joueur
-		if (playerx == explodeX && playery == explodeY + 32) {
-			
+		if (playerx == explodeX && playery == explodeY + 32) { // if the player was in the explosion area
+
 			lose();
 		}
-		
+
 	}
 
-
-	public void itemGravity()throws IOException  {
-		int testx = 32*29, testy = 32*29;
+	public void itemGravity() throws IOException {
 		
-		while (testy >= 0) {
-			
-		while (testx >= 0) {
-			Cave targettestblock = test.get(new Point(testx ,testy)); //cible un bloc
-			boolean itemcantfly = targettestblock.getcanfall();
-			if (itemcantfly == true) {  //si le bloc ciblé peux tombé (diamants ou roche) alors on passe a la suite
-				Cave undertest = test.get(new Point(testx ,testy + 32)); // on regarde la bloc du dessous 
-				if (undertest.getisfull() == false) { // si c'est vide alors le block tombe
-					
-					targettestblock.setcanfallkill(true);  // actuelisation de la position du bloc
-					targettestblock.setP(new Point(testx, testy + 32));
-					targettestblock.setY(testy + 32);
-					Image img = targettestblock.getImg();
-					Graphics graphics = this.getGraphics();
-					graphics.drawImage(img, testx, testy + 32, 32, 32, null);
-					test.replace(new Point(testx, testy + 32), targettestblock);
+		int testx = 32 * 29, testy = 32 * 29;
 
-					// update clear;
-					graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
-					test.replace(new Point(testx, testy), new Clear(testx, testy));
-					
-				}else if(undertest.getcancascade() == true) { // cascade
-					if (test.get(new Point(testx +32 ,testy)).getisfull() == false && test.get(new Point(testx +32 ,testy +32)).getisfull() == false ) {
-						targettestblock.setcanfallkill(true);  // actuelisation de la position du bloc
-						targettestblock.setP(new Point(testx +32, testy));
-						targettestblock.setX(testx + 32);
+		while (testy >= 0) {
+				//loop and check every tiles to find a rock
+			while (testx >= 0) {
+				Cave targettestblock = test.get(new Point(testx, testy)); // target a tile
+				boolean itemcantfly = targettestblock.getCanFall();
+				if (itemcantfly == true) { // if the tile can fall (diamond or rock) them:
+					Cave undertest = test.get(new Point(testx, testy + 32)); // check the tile below 
+					if (undertest.getIsFull() == false) { // if its empty the the rock/diamond fall
+
+						targettestblock.setCanFallKill(true); // set the fact that the rock can kill the player and actualize his position
+						targettestblock.setP(new Point(testx, testy + 32));
+						targettestblock.setY(testy + 32);
 						Image img = targettestblock.getImg();
 						Graphics graphics = this.getGraphics();
-						graphics.drawImage(img, testx +32, testy , 32, 32, null);
-						test.replace(new Point(testx +32, testy), targettestblock);
-						
+						graphics.drawImage(img, testx, testy + 32, 32, 32, null);
+						test.replace(new Point(testx, testy + 32), targettestblock);
+
+						// clear the previous rock/diamond position
 						graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
 						test.replace(new Point(testx, testy), new Clear(testx, testy));
+
+					} else if (undertest.getCanCascade() == true) { // cascade
+						//if the tile bellow is a rock or a diamond them check tile next to them and if they are empty move the rock
+						if (test.get(new Point(testx + 32, testy)).getIsFull() == false // check Right side
+								&& test.get(new Point(testx + 32, testy + 32)).getIsFull() == false) {
+							targettestblock.setCanFallKill(true); 
+							targettestblock.setP(new Point(testx + 32, testy));
+							targettestblock.setX(testx + 32);
+							Image img = targettestblock.getImg();
+							Graphics graphics = this.getGraphics();
+							graphics.drawImage(img, testx + 32, testy, 32, 32, null);
+							test.replace(new Point(testx + 32, testy), targettestblock);
+
+							graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
+							test.replace(new Point(testx, testy), new Clear(testx, testy));
+						} else if (test.get(new Point(testx - 32, testy)).getIsFull() == false // check left side
+								&& test.get(new Point(testx - 32, testy + 32)).getIsFull() == false) {
+							targettestblock.setCanFallKill(true); 
+							targettestblock.setP(new Point(testx - 32, testy));
+							targettestblock.setX(testx - 32);
+							Image img = targettestblock.getImg();
+							Graphics graphics = this.getGraphics();
+							graphics.drawImage(img, testx - 32, testy, 32, 32, null);
+							test.replace(new Point(testx - 32, testy), targettestblock);
+
+							graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
+							test.replace(new Point(testx, testy), new Clear(testx, testy));
+						} else {
+							targettestblock.setCanFallKill(false);
+						}
+					} else if (undertest.getIsAnExplosableEntity() == true && targettestblock.getCanFallKill() == true) { // if the rock is falling and the player is bellow then
+																		
+						int explodeY = targettestblock.getY();
+						int explodeX = targettestblock.getX();
+						explode(explodeY, explodeX); // generate an explosion on the player
+
+					} else {
+						targettestblock.setCanFallKill(false); // if the tile bellow is a static one then set set canfallkill to false 
 					}
-					else if (test.get(new Point(testx -32 ,testy)).getisfull() == false && test.get(new Point(testx -32 ,testy +32)).getisfull() == false ) {
-						targettestblock.setcanfallkill(true);  // actuelisation de la position du bloc
-						targettestblock.setP(new Point(testx -32, testy));
-						targettestblock.setX(testx - 32);
-						Image img = targettestblock.getImg();
-						Graphics graphics = this.getGraphics();
-						graphics.drawImage(img, testx -32, testy , 32, 32, null);
-						test.replace(new Point(testx -32, testy), targettestblock);
-						
-						graphics.drawImage(Clear.getImage(), testx, testy, 32, 32, null);
-						test.replace(new Point(testx, testy), new Clear(testx, testy));
-					}else {
-						targettestblock.setcanfallkill(false);
-					}
-				}else if ( undertest.getisanexplosableentity() == true  && targettestblock.getcanfallkill() == true) { //si un joueur ou monstre se trouve sous le block qui tombe alors explosion
-					int explodeY = targettestblock.getY();
-					int explodeX = targettestblock.getX();
-					explode(explodeY, explodeX);
-				
-				}else {
-					targettestblock.setcanfallkill(false); //si le block du dessous est solide alors on annule le fait que le bloc tue au contacte
+
 				}
-				
+				testx = testx - 32;
 			}
-			testx =testx - 32;
+			testx = 32 * 29;
+			testy = testy - 32;
 		}
-		testx = 32*29;
-		testy =testy - 32;
-		}
-		}
-	
-	public void moveMonster(Cave monster, int monsterX, int monsterY,int dirX, int dirY) throws IOException{
+	}
+
+	public void moveMonster(Cave monster, int monsterX, int monsterY, int dirX, int dirY) throws IOException {
+		//move the monster position and clear his previous position
 		Graphics graphics = this.getGraphics();
 		monster.setP(new Point(monsterX + dirX, monsterY + dirY));
 		monster.setX(monsterX + dirX);
@@ -314,300 +303,319 @@ public class ViewPanel extends JPanel implements Observer {
 		test.replace(new Point(monsterX + dirX, monsterY + dirY), monster);
 
 		// update clear;
-		graphics.drawImage(Clear.getImage(), monsterX , monsterY , 32, 32, null);
-		test.replace(new Point(monsterX , monsterY), new Clear(monsterX , monsterY));
-		if (Rockford.getInstance().getX() == monsterX +dirX && Rockford.getInstance().getY() == monsterY +dirY) {
-			explode( monsterY+dirY, monsterX+dirX);
+		graphics.drawImage(Clear.getImage(), monsterX, monsterY, 32, 32, null);
+		test.replace(new Point(monsterX, monsterY), new Clear(monsterX, monsterY));
+		if (Rockford.getInstance().getX() == monsterX + dirX && Rockford.getInstance().getY() == monsterY + dirY) {
+			explode(monsterY + dirY, monsterX + dirX);
 			lose();
 		}
 	}
-	
-	
-	public void movementMonster() throws IOException{
+
+	public void movementMonster() throws IOException {
 		int monsterdebugleft = 0;
 		int monsterdebugup = 0;
-		int testx = 32*29, testy = 32*29;
-		
+		int testx = 32 * 29, testy = 32 * 29;
+
 		while (testy >= 0) {
-			
-		while (testx >= 0) {
-			Cave monster =test.get(new Point(testx ,testy ));
-			boolean imAMonster = monster.getisAMonster(); //cible l'entité monster
-			if (imAMonster == true) {  //si le bloc ciblé est un monstre alors on passe a la suite
-				int monsterX = monster.getX();
-				int monsterY = monster.getY();
-				if (test.get(new Point(testx ,testy)).getgoRight() == true) {
-					if (test.get(new Point(testx ,testy -32)).getisfull() == false || test.get(new Point(testx ,testy -32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy -32)).getisAMonster() == false ) { 
-						monster.setgoRight(false);
-						monster.setgoUp(true);
-						monsterdebugup = 1;
-						moveMonster(monster, monsterX, monsterY,0,-32);//UP
+			// check the map to find monster
+			while (testx >= 0) {
+				Cave monster = test.get(new Point(testx, testy));
+				boolean imAMonster = monster.getIsAMonster(); 
+				if (imAMonster == true) { // if a monster is found
+					int monsterX = monster.getX(); //get monster coordinates
+					int monsterY = monster.getY();
+					// The monster checks if it can move in the tile at his left ,if he can't, he checks the tile upward,then to his right ,then downward.It moves to the first available tile					
+					if (test.get(new Point(testx, testy)).getGoRight() == true) {
+						if (test.get(new Point(testx, testy - 32)).getIsFull() == false
+								|| test.get(new Point(testx, testy - 32)).getIsAnExplosableEntity() == true
+										&& test.get(new Point(testx, testy - 32)).getIsAMonster() == false) {
+							monster.setGoRight(false);
+							monster.setGoUp(true);
+							monsterdebugup = 1;
+							moveMonster(monster, monsterX, monsterY, 0, -32);// UP
+						} else if (test.get(new Point(testx + 32, testy)).getIsFull() == false
+								|| test.get(new Point(testx + 32, testy)).getIsAnExplosableEntity() == true
+										&& test.get(new Point(testx + 32, testy)).getIsAMonster() == false) {
+							moveMonster(monster, monsterX, monsterY, +32, 0);// RIGHT
+						} else if (test.get(new Point(testx, testy + 32)).getIsFull() == false
+								|| test.get(new Point(testx, testy + 32)).getIsAnExplosableEntity() == true
+										&& test.get(new Point(testx, testy + 32)).getIsAMonster() == false) {
+							monster.setGoRight(false);
+							monster.setGoDown(true);
+							moveMonster(monster, monsterX, monsterY, 0, +32);// DOWN
+						} else if (test.get(new Point(testx - 32, testy)).getIsFull() == false
+								|| test.get(new Point(testx - 32, testy)).getIsAnExplosableEntity() == true
+										&& test.get(new Point(testx - 32, testy)).getIsAMonster() == false) {
+							monster.setGoRight(false);
+							monster.setGoLeft(true);
+							monsterdebugleft = 1;
+							moveMonster(monster, monsterX, monsterY, -32, 0);// LEFT
+						}
 					}
-					else if (test.get(new Point(testx +32 ,testy)).getisfull() == false || test.get(new Point(testx +32,testy )).getisanexplosableentity() == true && test.get(new Point(testx +32,testy )).getisAMonster() == false ) {
-						moveMonster(monster, monsterX, monsterY,+32,0);//RIGHT
+
+					else if (test.get(new Point(testx, testy)).getGoLeft() == true) {
+						if (monsterdebugleft == 0) {
+							if (test.get(new Point(testx, testy + 32)).getIsFull() == false
+									|| test.get(new Point(testx, testy + 32)).getIsAnExplosableEntity() == true
+											&& test.get(new Point(testx, testy + 32)).getIsAMonster() == false) {
+								monster.setGoLeft(false);
+								monster.setGoDown(true);
+								moveMonster(monster, monsterX, monsterY, 0, +32);// DOWN
+
+							} else if (test.get(new Point(testx - 32, testy)).getIsFull() == false
+									|| test.get(new Point(testx - 32, testy)).getIsAnExplosableEntity() == true
+											&& test.get(new Point(testx - 32, testy)).getIsAMonster() == false) {
+								monsterdebugleft = 1;
+								moveMonster(monster, monsterX, monsterY, -32, 0);// LEFT
+
+							} else if (test.get(new Point(testx, testy - 32)).getIsFull() == false
+									|| test.get(new Point(testx, testy - 32)).getIsAnExplosableEntity() == true
+											&& test.get(new Point(testx, testy - 32)).getIsAMonster() == false) {
+								monster.setGoLeft(false);
+								monster.setGoUp(true);
+								monsterdebugup = 1;
+								moveMonster(monster, monsterX, monsterY, 0, -32);// UP
+
+							} else if (test.get(new Point(testx + 32, testy)).getIsFull() == false
+									|| test.get(new Point(testx + 32, testy)).getIsAnExplosableEntity() == true
+											&& test.get(new Point(testx + 32, testy)).getIsAMonster() == false) {// tt
+																													// droit
+								monster.setGoLeft(false);
+								monster.setGoRight(true);
+								moveMonster(monster, monsterX, monsterY, +32, 0);// RIGHT
+							}
+						} else {
+							monsterdebugleft = 0;
+						}
 					}
-					else if(test.get(new Point(testx ,testy +32)).getisfull() == false || test.get(new Point(testx ,testy +32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy +32)).getisAMonster() == false ) {
-						monster.setgoRight(false);
-						monster.setgoDown(true);
-						moveMonster(monster, monsterX, monsterY,0,+32);//DOWN
-					}else if (test.get(new Point(testx -32 ,testy)).getisfull() == false || test.get(new Point(testx -32,testy )).getisanexplosableentity() == true && test.get(new Point(testx -32,testy )).getisAMonster() == false ){
-						monster.setgoRight(false);
-						monster.setgoLeft(true);
-						monsterdebugleft = 1;
-						moveMonster(monster, monsterX, monsterY,-32,0);//LEFT
+
+					else if (test.get(new Point(testx, testy)).getGoUp() == true) {
+						if (monsterdebugup == 0) {
+							if (test.get(new Point(testx - 32, testy)).getIsFull() == false
+									|| test.get(new Point(testx - 32, testy)).getIsAnExplosableEntity() == true
+											&& test.get(new Point(testx - 32, testy)).getIsAMonster() == false) {
+								monster.setGoUp(false);
+								monster.setGoLeft(true);
+								monsterdebugleft = 1;
+								moveMonster(monster, monsterX, monsterY, -32, 0);// LEFT
+
+							} else if (test.get(new Point(testx, testy - 32)).getIsFull() == false
+									|| test.get(new Point(testx, testy - 32)).getIsAnExplosableEntity() == true
+											&& test.get(new Point(testx, testy - 32)).getIsAMonster() == false) {
+								monsterdebugup = 1;
+								moveMonster(monster, monsterX, monsterY, 0, -32);// UP
+
+							} else if (test.get(new Point(testx + 32, testy)).getIsFull() == false
+									|| test.get(new Point(testx + 32, testy)).getIsAnExplosableEntity() == true
+											&& test.get(new Point(testx + 32, testy)).getIsAMonster() == false) {
+								monster.setGoUp(false);
+								monster.setGoRight(true);
+								moveMonster(monster, monsterX, monsterY, +32, 0);// RIGHT
+
+							} else if (test.get(new Point(testx, testy + 32)).getIsFull() == false
+									|| test.get(new Point(testx, testy + 32)).getIsAnExplosableEntity() == true
+											&& test.get(new Point(testx, testy + 32)).getIsAMonster() == false) {// droite
+								monster.setGoUp(false);
+								monster.setGoDown(true);
+								moveMonster(monster, monsterX, monsterY, 0, +32);// DOWN
+							}
+						} else {
+							monsterdebugup = 0;
+						}
 					}
+
+					else { // DOWN
+						if (test.get(new Point(testx + 32, testy)).getIsFull() == false
+								|| test.get(new Point(testx + 32, testy)).getIsAnExplosableEntity() == true
+										&& test.get(new Point(testx = 32, testy)).getIsAMonster() == false) {
+							monster.setGoLeft(false);
+							monster.setGoRight(true);
+							moveMonster(monster, monsterX, monsterY, +32, 0);// RIGHT
+
+						} else if (test.get(new Point(testx, testy + 32)).getIsFull() == false
+								|| test.get(new Point(testx, testy + 32)).getIsAnExplosableEntity() == true
+										&& test.get(new Point(testx, testy + 32)).getIsAMonster() == false) {
+							moveMonster(monster, monsterX, monsterY, 0, +32);// DOWN
+
+						} else if (test.get(new Point(testx - 32, testy)).getIsFull() == false
+								|| test.get(new Point(testx - 32, testy)).getIsAnExplosableEntity() == true
+										&& test.get(new Point(testx - 32, testy)).getIsAMonster() == false) {
+							monster.setGoUp(false);
+							monster.setGoLeft(true);
+							monsterdebugleft = 1;
+							moveMonster(monster, monsterX, monsterY, -32, 0);// LEFT
+
+						} else if (test.get(new Point(testx, testy - 32)).getIsFull() == false
+								|| test.get(new Point(testx, testy - 32)).getIsAnExplosableEntity() == true
+										&& test.get(new Point(testx, testy - 32)).getIsAMonster() == false) { // gauche
+							monster.setGoLeft(false);
+							monster.setGoUp(true);
+							monsterdebugup = 1;
+							moveMonster(monster, monsterX, monsterY, 0, -32);// UP
+
+						}
+
 					}
-				
-				
-				
-				else if(test.get(new Point(testx ,testy)).getgoLeft() == true) {
-					if (monsterdebugleft == 0) {
-					if(test.get(new Point(testx ,testy +32)).getisfull() == false || test.get(new Point(testx ,testy +32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy +32)).getisAMonster() == false) {
-						monster.setgoLeft(false);
-						monster.setgoDown(true);
-						moveMonster(monster, monsterX, monsterY,0,+32);//DOWN
-					
-					}else if (test.get(new Point(testx -32 ,testy)).getisfull() == false || test.get(new Point(testx -32,testy )).getisanexplosableentity() == true && test.get(new Point(testx -32,testy )).getisAMonster() == false) {
-						monsterdebugleft = 1;
-						moveMonster(monster, monsterX, monsterY,-32,0);//LEFT
-					
-					}else if (test.get(new Point(testx ,testy -32)).getisfull() == false || test.get(new Point(testx ,testy -32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy -32)).getisAMonster() == false) { 
-						monster.setgoLeft(false);
-						monster.setgoUp(true);
-						monsterdebugup = 1;
-						moveMonster(monster, monsterX, monsterY,0,-32);//UP
-					
-					}else if (test.get(new Point(testx +32 ,testy)).getisfull() == false || test.get(new Point(testx +32,testy )).getisanexplosableentity() == true && test.get(new Point(testx +32,testy )).getisAMonster() == false ){//tt droit
-						monster.setgoLeft(false);
-						monster.setgoRight(true);
-						moveMonster(monster, monsterX, monsterY,+32,0);//RIGHT
-					}					
-					}else {
-						monsterdebugleft = 0;
-					}
-					}
-				
-				else if(test.get(new Point(testx ,testy)).getgoUp() == true ) {
-					if (monsterdebugup == 0) {
-					if (test.get(new Point(testx -32 ,testy)).getisfull() == false || test.get(new Point(testx -32,testy )).getisanexplosableentity() == true && test.get(new Point(testx -32,testy )).getisAMonster() == false) {
-						monster.setgoUp(false);
-						monster.setgoLeft(true);
-						monsterdebugleft = 1;
-						moveMonster(monster, monsterX, monsterY,-32,0);//LEFT
-					
-					}else if (test.get(new Point(testx ,testy -32)).getisfull() == false || test.get(new Point(testx ,testy -32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy -32)).getisAMonster() == false) { 
-						monsterdebugup = 1;
-						moveMonster(monster, monsterX, monsterY,0,-32);//UP
-										
-					}else if (test.get(new Point(testx +32 ,testy)).getisfull() == false || test.get(new Point(testx +32,testy )).getisanexplosableentity() == true && test.get(new Point(testx +32,testy )).getisAMonster() == false) {
-						monster.setgoUp(false);
-						monster.setgoRight(true);
-						moveMonster(monster, monsterX, monsterY,+32,0);//RIGHT
-					
-					}else if(test.get(new Point(testx ,testy +32)).getisfull() == false || test.get(new Point(testx ,testy +32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy +32)).getisAMonster() == false) {// droite
-						monster.setgoUp(false);
-						monster.setgoDown(true);
-						moveMonster(monster, monsterX, monsterY,0,+32);//DOWN				
-					}					
-					}else {
-						monsterdebugup = 0;
-					}
-					}
-				
-				
-				else { //DOWN
-					if (test.get(new Point(testx +32 ,testy)).getisfull() == false || test.get(new Point(testx +32,testy )).getisanexplosableentity() == true && test.get(new Point(testx =32,testy )).getisAMonster() == false) {
-						monster.setgoLeft(false);
-						monster.setgoRight(true);
-						moveMonster(monster, monsterX, monsterY,+32,0);//RIGHT
-						
-					}else if(test.get(new Point(testx ,testy +32)).getisfull() == false || test.get(new Point(testx ,testy +32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy +32)).getisAMonster() == false) {
-						moveMonster(monster, monsterX, monsterY,0,+32);//DOWN
-						
-					}else if (test.get(new Point(testx -32 ,testy)).getisfull() == false || test.get(new Point(testx -32,testy )).getisanexplosableentity() == true && test.get(new Point(testx -32,testy )).getisAMonster() == false) {
-						monster.setgoUp(false);
-						monster.setgoLeft(true);
-						monsterdebugleft = 1;
-						moveMonster(monster, monsterX, monsterY,-32,0);//LEFT
-						
-					}else if (test.get(new Point(testx ,testy -32)).getisfull() == false || test.get(new Point(testx ,testy -32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy -32)).getisAMonster() == false) { //gauche
-						monster.setgoLeft(false);
-						monster.setgoUp(true);
-						monsterdebugup = 1;
-						moveMonster(monster, monsterX, monsterY,0,-32);//UP
-								
-					}
-					
 				}
+				testx = testx - 32;
 			}
-		testx =testx - 32;
+			testx = 32 * 29;
+			testy = testy - 32;
+		}
 	}
-	testx = 32*29;
-	testy =testy - 32;
-	}
-	}
-
 
 	
-
-
-	
-	public void hitbox(int x, int y, int Px , int Py) {	
+	public void hitbox(int x, int y, int Px, int Py) { //check the type of tile where the player try to go
 		Cave targetitem = test.get(new Point(x + Px, y + Py));
-		boolean destructablebyPlayer = targetitem.getdestructP1();
-		boolean claimablebyPlayer = targetitem.getclaimedP1();
+		boolean destructablebyPlayer = targetitem.getDestructP1();
+		boolean claimablebyPlayer = targetitem.getClaimedP1();
 		boolean thisIsDaWay = targetitem.getDaWay();
-		if ( claimablebyPlayer == true){
-			checkvalue = true;
-			score = score + diamondValue ;
+		if (claimablebyPlayer == true) { // if its a diamond claim it and inprove the score
+			checkValue = true;
+			score = score + diamondValue;
 			Graphics g = this.getGraphics();
-			g.clearRect(1000, 180, 250,30);
+			g.clearRect(1000, 180, 250, 30);
 			g.setColor(Color.BLACK);
 			g.fillRect(1000, 180, 250, 30);
 			Font font = new Font("Courier", Font.BOLD, 20);
-		    g.setFont(font);
-		    g.setColor(Color.white);          
-		    g.drawString(" Your curent score is " + score, 1000, 200); 
-		    g.drawString ("Goal Score = " + levelExitScore, 1000, 350);
-			//System.out.println(" Your curent score is " + score);
-		
-		}else if ( destructablebyPlayer == true){
-			checkvalue = true;
-		
-		
-		}else if ( thisIsDaWay == true && score >= levelExitScore ) {
-			checkvalue = true;
+			g.setFont(font);
+			g.setColor(Color.white);
+			g.drawString(" Your curent score is " + score, 1000, 200);
+			g.drawString("Goal Score = " + levelExitScore, 1000, 350);
+			// System.out.println(" Your curent score is " + score);
+
+		} else if (destructablebyPlayer == true) { // if its dirt clear it a move the player
+			checkValue = true;
+
+		} else if (thisIsDaWay == true && score >= levelExitScore) { // if its the exit and the score is high enough the finish the level
+			checkValue = true;
 			win(score);
 			score = 0;
+		} else { // else do nothing 
+			checkValue = false;
 		}
-		else {
-			checkvalue = false;
-		}
-		
+
 	}
 
-	
-	public void pushTheRock(int x, int y,int Px) throws IOException {
+	public void pushTheRock(int x, int y, int Px) throws IOException { // if the player walk against a rock and the tile behind it is empty then move the rock 
 		Graphics graphics = this.getGraphics();
 		Cave targetitem = test.get(new Point(x + Px, y));
-		if (targetitem.getcanpush() == true) {
-			Cave afterrock = test.get(new Point(x+Px+Px,y));
-			if (afterrock.getisfull() == false) {
-				
-					targetitem.setP(new Point(x +Px*2 , y));
-					targetitem.setX(x +Px*2);
-					Image img1 = targetitem.getImg();
-					graphics.drawImage(img1, x +Px*2, y, 32, 32, null);
-					test.replace(new Point(x +Px*2, y), targetitem);
-					
-					Rockford.getInstance().setP(new Point(x +Px, y));
-					Rockford.getInstance().setX(x +Px);
-					if (Px > 0) {// RIGHT
-						Image img = Rockford.getInstance().getImgRight();
-						graphics.drawImage(img, x +Px, y, 32, 32, null);
-					}else {
-						Image img = Rockford.getInstance().getImgLeft();
-						graphics.drawImage(img, x +Px, y, 32, 32, null);
-					}
-					test.replace(new Point(x +Px, y), Rockford.getInstance());
-					
-					// update clear;
-					graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
-					test.replace(new Point(x, y), new Clear(x, y));
+		if (targetitem.getCanPush() == true) {
+			Cave afterrock = test.get(new Point(x + Px + Px, y));
+			if (afterrock.getIsFull() == false) {
+
+				targetitem.setP(new Point(x + Px * 2, y));
+				targetitem.setX(x + Px * 2);
+				Image img1 = targetitem.getImg();
+				graphics.drawImage(img1, x + Px * 2, y, 32, 32, null);
+				test.replace(new Point(x + Px * 2, y), targetitem);
+
+				Rockford.getInstance().setP(new Point(x + Px, y));
+				Rockford.getInstance().setX(x + Px);
+				if (Px > 0) {// RIGHT
+					Image img = Rockford.getInstance().getImgRight();
+					graphics.drawImage(img, x + Px, y, 32, 32, null);
+				} else {
+					Image img = Rockford.getInstance().getImgLeft();
+					graphics.drawImage(img, x + Px, y, 32, 32, null);
 				}
-					
-				}
+				test.replace(new Point(x + Px, y), Rockford.getInstance());
+
+				// update clear;
+				graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
+				test.replace(new Point(x, y), new Clear(x, y));
+			}
+
+		}
 	}
 
-
-	
 	public void movePlayer(int x, int y, ControllerOrder co) throws IOException {
 		Graphics graphics = this.getGraphics();
 		switch (co) {
 		case up:
 			Px = 0;
 			Py = -32;
-			hitbox( x,  y,  Px,  Py);
-			if (checkvalue == true) {
-			// update rockford;
-			Rockford.getInstance().setP(new Point(x, y - 32));
-			Rockford.getInstance().setY(y - 32);
-			Image img = Rockford.getInstance().getImgUp();
-			graphics.drawImage(img, x, y - 32, 32, 32, null);
-			test.replace(new Point(x, y - 32), Rockford.getInstance());
+			hitbox(x, y, Px, Py);
+			if (checkValue == true) {
+				// update rockford;
+				Rockford.getInstance().setP(new Point(x, y - 32));
+				Rockford.getInstance().setY(y - 32);
+				Image img = Rockford.getInstance().getImgUp();
+				graphics.drawImage(img, x, y - 32, 32, 32, null);
+				test.replace(new Point(x, y - 32), Rockford.getInstance());
 
-			// update clear;
-			graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
-			test.replace(new Point(x, y), new Clear(x, y));
+				// update clear;
+				graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
+				test.replace(new Point(x, y), new Clear(x, y));
 			}
-			checkvalue = false;
+			checkValue = false;
 			break;
-			
+
 		case right:
-			
-			if (startvalue != 1) {
-				Thread myThread = new Thread(new MyRunnable());
-		        myThread.start();
-		        Thread myThreadMonster = new Thread(new MyRunnableMonster());
-		        myThreadMonster.start();
-		        startvalue = 1;
+
+			if (startValue != 1) {
+				Thread myThread = new Thread(new MyRunnable()); //launch the thread of gravity and monster movement when the player first move
+				myThread.start();
+				Thread myThreadMonster = new Thread(new MyRunnableMonster());
+				myThreadMonster.start();
+				startValue = 1;
 			}
 			Px = +32;
 			Py = 0;
-			hitbox( x,  y,  Px,  Py);
-			pushTheRock(x,y,Px);
-			if (checkvalue == true) {
-			// update rockford;
-			Rockford.getInstance().setP(new Point(x + 32, y));
-			Rockford.getInstance().setX(x + 32);
-			Image img1 = Rockford.getInstance().getImgRight();
-			graphics.drawImage(img1, x + 32, y, 32, 32, null);
-			test.replace(new Point(x + 32, y), Rockford.getInstance());
+			hitbox(x, y, Px, Py);
+			pushTheRock(x, y, Px);
+			if (checkValue == true) {
+				// update rockford;
+				Rockford.getInstance().setP(new Point(x + 32, y));
+				Rockford.getInstance().setX(x + 32);
+				Image img1 = Rockford.getInstance().getImgRight();
+				graphics.drawImage(img1, x + 32, y, 32, 32, null);
+				test.replace(new Point(x + 32, y), Rockford.getInstance());
 
-			// update clear;
-			graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
-			test.replace(new Point(x, y), new Clear(x, y));
+				// update clear;
+				graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
+				test.replace(new Point(x, y), new Clear(x, y));
 			}
-			checkvalue = false;
+			checkValue = false;
 			break;
 
 		case down:
 			Px = 0;
 			Py = 0 + 32;
-			hitbox( x,  y,  Px,  Py);
-			if (checkvalue == true) {
-			// update rockford;
-			Rockford.getInstance().setP(new Point(x, y + 32));
-			Rockford.getInstance().setY(y + 32);
-			Image img2 = Rockford.getInstance().getImgDown();
-			graphics.drawImage(img2, x, y + 32, 32, 32, null);
-			test.replace(new Point(x, y + 32), Rockford.getInstance());
+			hitbox(x, y, Px, Py);
+			if (checkValue == true) {
+				// update rockford;
+				Rockford.getInstance().setP(new Point(x, y + 32));
+				Rockford.getInstance().setY(y + 32);
+				Image img2 = Rockford.getInstance().getImgDown();
+				graphics.drawImage(img2, x, y + 32, 32, 32, null);
+				test.replace(new Point(x, y + 32), Rockford.getInstance());
 
-			// update clear;
-			graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
-			test.replace(new Point(x, y), new Clear(x, y));
+				// update clear;
+				graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
+				test.replace(new Point(x, y), new Clear(x, y));
 			}
-			checkvalue = false;
+			checkValue = false;
 			break;
-			
-		case left:
-			Px = 0 -32;
-			Py = 0;
-			hitbox( x,  y,  Px,  Py);
-			pushTheRock(x,y,Px);
-			if (checkvalue == true) {
-			// update rockford;
-			Rockford.getInstance().setP(new Point(x - 32, y));
-			Rockford.getInstance().setX(x - 32);
-			Image img3 = Rockford.getInstance().getImgLeft();
-			graphics.drawImage(img3, x - 32, y, 32, 32, null);
-			test.replace(new Point(x - 32, y), Rockford.getInstance());
 
-			// update clear;
-			graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
-			test.replace(new Point(x, y), new Clear(x, y));
+		case left:
+			Px = 0 - 32;
+			Py = 0;
+			hitbox(x, y, Px, Py);
+			pushTheRock(x, y, Px);
+			if (checkValue == true) {
+				// update rockford;
+				Rockford.getInstance().setP(new Point(x - 32, y));
+				Rockford.getInstance().setX(x - 32);
+				Image img3 = Rockford.getInstance().getImgLeft();
+				graphics.drawImage(img3, x - 32, y, 32, 32, null);
+				test.replace(new Point(x - 32, y), Rockford.getInstance());
+
+				// update clear;
+				graphics.drawImage(Clear.getImage(), x, y, 32, 32, null);
+				test.replace(new Point(x, y), new Clear(x, y));
 			}
-			checkvalue = false;
+			checkValue = false;
 			break;
 		default:
 			break;
