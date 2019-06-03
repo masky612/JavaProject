@@ -334,6 +334,8 @@ public class ViewPanel extends JPanel implements Observer {
 	
 	
 	public void movementMonster() throws IOException{
+		int monsterdebugleft = 0;
+		int monsterdebugup = 0;
 		int testx = 32*29, testy = 32*29;
 		
 		while (testy >= 0) {
@@ -348,6 +350,7 @@ public class ViewPanel extends JPanel implements Observer {
 					if (test.get(new Point(testx ,testy -32)).getisfull() == false || test.get(new Point(testx ,testy -32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy -32)).getisAMonster() == false ) { 
 						monster.setgoRight(false);
 						monster.setgoUp(true);
+						monsterdebugup = 1;
 						moveMonster(monster, monsterX, monsterY,0,-32);//UP
 					}
 					else if (test.get(new Point(testx +32 ,testy)).getisfull() == false || test.get(new Point(testx +32,testy )).getisanexplosableentity() == true && test.get(new Point(testx +32,testy )).getisAMonster() == false ) {
@@ -360,6 +363,7 @@ public class ViewPanel extends JPanel implements Observer {
 					}else if (test.get(new Point(testx -32 ,testy)).getisfull() == false || test.get(new Point(testx -32,testy )).getisanexplosableentity() == true && test.get(new Point(testx -32,testy )).getisAMonster() == false ){
 						monster.setgoRight(false);
 						monster.setgoLeft(true);
+						monsterdebugleft = 1;
 						moveMonster(monster, monsterX, monsterY,-32,0);//LEFT
 					}
 					}
@@ -367,17 +371,20 @@ public class ViewPanel extends JPanel implements Observer {
 				
 				
 				else if(test.get(new Point(testx ,testy)).getgoLeft() == true) {
+					if (monsterdebugleft == 0) {
 					if(test.get(new Point(testx ,testy +32)).getisfull() == false || test.get(new Point(testx ,testy +32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy +32)).getisAMonster() == false) {
 						monster.setgoLeft(false);
 						monster.setgoDown(true);
 						moveMonster(monster, monsterX, monsterY,0,+32);//DOWN
 					
 					}else if (test.get(new Point(testx -32 ,testy)).getisfull() == false || test.get(new Point(testx -32,testy )).getisanexplosableentity() == true && test.get(new Point(testx -32,testy )).getisAMonster() == false) {
+						monsterdebugleft = 1;
 						moveMonster(monster, monsterX, monsterY,-32,0);//LEFT
 					
 					}else if (test.get(new Point(testx ,testy -32)).getisfull() == false || test.get(new Point(testx ,testy -32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy -32)).getisAMonster() == false) { 
 						monster.setgoLeft(false);
 						monster.setgoUp(true);
+						monsterdebugup = 1;
 						moveMonster(monster, monsterX, monsterY,0,-32);//UP
 					
 					}else if (test.get(new Point(testx +32 ,testy)).getisfull() == false || test.get(new Point(testx +32,testy )).getisanexplosableentity() == true && test.get(new Point(testx +32,testy )).getisAMonster() == false ){//tt droit
@@ -385,16 +392,21 @@ public class ViewPanel extends JPanel implements Observer {
 						monster.setgoRight(true);
 						moveMonster(monster, monsterX, monsterY,+32,0);//RIGHT
 					}					
+					}else {
+						monsterdebugleft = 0;
+					}
 					}
 				
-				
 				else if(test.get(new Point(testx ,testy)).getgoUp() == true ) {
+					if (monsterdebugup == 0) {
 					if (test.get(new Point(testx -32 ,testy)).getisfull() == false || test.get(new Point(testx -32,testy )).getisanexplosableentity() == true && test.get(new Point(testx -32,testy )).getisAMonster() == false) {
 						monster.setgoUp(false);
 						monster.setgoLeft(true);
+						monsterdebugleft = 1;
 						moveMonster(monster, monsterX, monsterY,-32,0);//LEFT
 					
 					}else if (test.get(new Point(testx ,testy -32)).getisfull() == false || test.get(new Point(testx ,testy -32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy -32)).getisAMonster() == false) { 
+						monsterdebugup = 1;
 						moveMonster(monster, monsterX, monsterY,0,-32);//UP
 										
 					}else if (test.get(new Point(testx +32 ,testy)).getisfull() == false || test.get(new Point(testx +32,testy )).getisanexplosableentity() == true && test.get(new Point(testx +32,testy )).getisAMonster() == false) {
@@ -407,8 +419,10 @@ public class ViewPanel extends JPanel implements Observer {
 						monster.setgoDown(true);
 						moveMonster(monster, monsterX, monsterY,0,+32);//DOWN				
 					}					
+					}else {
+						monsterdebugup = 0;
 					}
-				
+					}
 				
 				
 				else { //DOWN
@@ -423,18 +437,17 @@ public class ViewPanel extends JPanel implements Observer {
 					}else if (test.get(new Point(testx -32 ,testy)).getisfull() == false || test.get(new Point(testx -32,testy )).getisanexplosableentity() == true && test.get(new Point(testx -32,testy )).getisAMonster() == false) {
 						monster.setgoUp(false);
 						monster.setgoLeft(true);
+						monsterdebugleft = 1;
 						moveMonster(monster, monsterX, monsterY,-32,0);//LEFT
 						
 					}else if (test.get(new Point(testx ,testy -32)).getisfull() == false || test.get(new Point(testx ,testy -32)).getisanexplosableentity() == true && test.get(new Point(testx ,testy -32)).getisAMonster() == false) { //gauche
 						monster.setgoLeft(false);
 						monster.setgoUp(true);
+						monsterdebugup = 1;
 						moveMonster(monster, monsterX, monsterY,0,-32);//UP
 								
 					}
 					
-					/*faire test de priorité
-					 * gauche tjr prioritaire, tout droit,droite, demi tour
-					 */
 				}
 			}
 		testx =testx - 32;
