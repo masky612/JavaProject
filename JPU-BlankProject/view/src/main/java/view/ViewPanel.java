@@ -152,6 +152,9 @@ public class ViewPanel extends JPanel implements Observer {
 	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 	 */
 	@Override
+	
+	//Creating the game map with objects
+	
 	protected void paintComponent(final Graphics graphics) {
 		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
 		graphics.setColor(Color.BLACK);
@@ -173,18 +176,13 @@ public class ViewPanel extends JPanel implements Observer {
 			}
 
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			
 			e1.printStackTrace();
 		}
 
 	}
 
-	
-	// 11111111111111111111111111111111111111111111111111111111111111
-	//333333333333333333333333333DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-	
-	
-	//deso pr le spam XD c juste pr être sur que vs voyer bien les message 
+
 	public void lose() {
 		viewFrame.printMessage("you lose");
 		System.exit(0);
@@ -195,16 +193,6 @@ public class ViewPanel extends JPanel implements Observer {
 		System.exit(0);
 	}
 	
-	//   /!\ win et lose c pr vous les gars je redirige dessus dés qu'on gagne ou perd vs avez juste a gerer l'interface et fermant les fenetre et en ramenant au menu avec un petit message.
-	//
-	// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-	// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-	
-	
-	
-	// reste a faire : deplacement monstres (en cours)
-	//                 colision monstres (-^)
-	//				   interface graphique
 	
 	
 	public void explode(int explodeY, int explodeX) throws IOException {
@@ -254,7 +242,7 @@ public class ViewPanel extends JPanel implements Observer {
 			
 			lose();
 		}
-		//System.out.println("boom");
+		
 	}
 
 

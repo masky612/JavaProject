@@ -8,8 +8,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+
 /**
- * Mais c'est pas gentil
+ * 
  *
  * @author Jean-Aymeric Diet
  */
@@ -98,80 +99,36 @@ public class Level extends Entity {
 		this.message = message;
 	}
 
-	public HashMap<Point,Cave> createMap() throws IOException {
-		/*String[] chaineMap = this.getMessage().split(",");
-		HashMap<Point, String> map = new HashMap<Point, String>();
-		int x = 0;
-		int y = 0;
-		for (String sprite : chaineMap) {
-			if (sprite == ";") {
-				y++;
-				x = 0;
-			} else {
-				map.put(new Point(x, y), sprite);	
-				x++;
-				System.out.println("mon sprite: " + sprite);	
-			}
-			
-		}
-		return map;*/
-		
+	 // Creating HashMap to link objects with coordinates
+	
+	public HashMap<Point, Cave> createMap() throws IOException {
+
 		String chaineMap = this.getMessage();
 		HashMap<Point, Cave> map = new HashMap<Point, Cave>();
 		int x = 0;
 		int y = 0;
 		char sprite;
 		String spriteStr;
-		for (int i=0; i<chaineMap.length(); i++) {
-			sprite= chaineMap.charAt(i);
-			
+		for (int i = 0; i < chaineMap.length(); i++) {
+			sprite = chaineMap.charAt(i);
+
 			if (sprite == ';') {
-				y+=32;
+				y += 32;
 				x = 0;
-				spriteStr= String.valueOf(sprite);
+				spriteStr = String.valueOf(sprite);
 				Cave obj = Cave.getObjFromSpriteStr(spriteStr, x, y);
-				map.put(new Point(x,y), obj);
-				//System.out.println("i'm if");	
+				map.put(new Point(x, y), obj);
+
 			} else {
-				spriteStr= ""+sprite;
+				spriteStr = "" + sprite;
 				Cave obj = Cave.getObjFromSpriteStr(spriteStr, x, y);
-				map.put(new Point(x,y), obj);	
-				x+=32;
-				//System.out.println("my sprite: " + spriteStr);	
+				map.put(new Point(x, y), obj);
+				x += 32;
+
 			}
 		}
-		
-		/*Set<Entry<Point, String>> setHm = map.entrySet();
-	      Iterator<Entry<Point, String>> it = setHm.iterator();
-	      while(it.hasNext()){
-	         Entry<Point, String> e = it.next();
-	         
-	        System.out.println((int)e.getKey().getY()+" "+(int)e.getKey().getX()+ " : " + e.getValue());
-	      }*/
+
 		return map;
 	}
-
-	
-	/*public String printMap(HashMap<Point, String> map) {
-		int height = 30;
-		int width = 30;
-		int lenght = height * width;
-		StringBuilder grid = new StringBuilder(lenght);
-		for (int i = 0; i < lenght; i++) {
-			if (i >= width && i % (width) == 0) {
-				grid.append('\n');
-			}
-			grid.append(' ');
-		}
-		for (Point c : map.keySet()) {
-			int index = (int) (c.getX() * (width + 1) + c.getY());
-			grid.setCharAt(index, map.get(c).toString().charAt(0));
-			//System.out.println(c.getX()+" "+c.getY());
-
-		}
-		
-		//System.out.println(grid.toString());
-		return grid.toString();
-	}*/
 
 }
