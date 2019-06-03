@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 
 package main;
 
@@ -7,10 +10,9 @@ import model.Model;
 import view.View;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Main.
- *
- * @author Jean-Aymeric Diet
  */
 public abstract class Main {
 
@@ -18,8 +20,7 @@ public abstract class Main {
     /**
      * The main method.
      *
-     * @param args
-     *            the arguments
+     * @param args the arguments
      */
 
 

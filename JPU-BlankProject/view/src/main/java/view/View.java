@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package view;
 
 import java.awt.event.KeyEvent;
@@ -12,21 +15,19 @@ import contract.IController;
 import contract.IModel;
 import contract.IView;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class View.
- *
- * @author Jean-Aymeric Diet
  */
 public final class View implements IView, Runnable {
 
-	/** The frame. */
+	/** The view frame. */
 	private final ViewFrame viewFrame;
 
 	/**
 	 * Instantiates a new view.
 	 *
-	 * @param model
-	 *          the model
+	 * @param model the model
 	 */
 	public View(final IModel model) {
 		this.viewFrame = new ViewFrame(model);
@@ -36,8 +37,7 @@ public final class View implements IView, Runnable {
 	/**
 	 * Key code to controller order.
 	 *
-	 * @param keyCode
-	 *          the key code
+	 * @param keyCode the key code
 	 * @return the controller order
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
@@ -86,13 +86,15 @@ public final class View implements IView, Runnable {
 	/**
 	 * Sets the controller.
 	 *
-	 * @param controller
-	 *          the new controller
+	 * @param controller the new controller
 	 */
 	public void setController(final IController controller) {
 		this.viewFrame.setController(controller);
 	}
 
+	/* (non-Javadoc)
+	 * @see contract.IView#movePlayer(int, int, contract.ControllerOrder)
+	 */
 	@Override
 	public void movePlayer(int x, int y, ControllerOrder co) {
 		try {

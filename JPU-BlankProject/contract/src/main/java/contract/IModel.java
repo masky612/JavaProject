@@ -1,28 +1,29 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package contract;
 
 import java.util.Observable;
 
 import entity.Level;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface IModel.
- *
- * @author Jean-Aymeric Diet
  */
 public interface IModel {
 
 	/**
-	 * Gets the hello world.
+	 * Gets the level.
 	 *
-	 * @return the helloworld entity
+	 * @return the level
 	 */
 	Level getLevel();
 
 	/**
-	 * Load the message.
+	 * Load level.
 	 *
-	 * @param i
-	 *          the code
+	 * @param i the i
 	 */
 	void loadLevel(int i);
 

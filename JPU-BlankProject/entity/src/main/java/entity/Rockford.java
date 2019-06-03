@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package entity;
 
 import java.awt.Image;
@@ -10,18 +13,37 @@ import javax.imageio.ImageIO;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Rockford.
+ */
 public class Rockford extends Cave {
 	
 	
 	
 
+	/** The img up. */
 	private Image imgUp;
+	
+	/** The img down. */
 	private Image imgDown;
+	
+	/** The img left. */
 	private Image imgLeft;
+	
+	/** The img right. */
 	private Image imgRight;
+	
+	/** The instance. */
 	private static Rockford INSTANCE = null;
 	
 	
+	/**
+	 * Gets the single instance of Rockford.
+	 *
+	 * @return single instance of Rockford
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public static synchronized Rockford getInstance() throws IOException {
 		if (Rockford.INSTANCE == null) {
 			Rockford.INSTANCE = new Rockford(0,0);
@@ -29,6 +51,13 @@ public class Rockford extends Cave {
 		return Rockford.INSTANCE;
 	}
 	
+	/**
+	 * Instantiates a new rockford.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public  Rockford(int x, int y) throws IOException {
 		this.setX(x);
 		this.setY(y);
@@ -72,19 +101,41 @@ public class Rockford extends Cave {
 	
 
 	
+	/** The p. */
 	private Point p;
+	
+	/**
+	 * Gets the img up.
+	 *
+	 * @return the img up
+	 */
 	public Image getImgUp() {
 		return imgUp;
 	}
 
+	/**
+	 * Gets the img down.
+	 *
+	 * @return the img down
+	 */
 	public Image getImgDown() {
 		return imgDown;
 	}
 
+	/**
+	 * Gets the img left.
+	 *
+	 * @return the img left
+	 */
 	public Image getImgLeft() {
 		return imgLeft;
 	}
 
+	/**
+	 * Gets the img right.
+	 *
+	 * @return the img right
+	 */
 	public Image getImgRight() {
 		return imgRight;
 	}

@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package model;
 
 import java.sql.CallableStatement;
@@ -7,20 +10,17 @@ import java.sql.SQLException;
 
 import entity.Level;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DAOLevel.
- *
- * @author Jean-Aymeric Diet
  */
 class DAOLevel extends DAOEntity<Level> {
 
 	/**
-	 * Instantiates a new DAO hello world.
+	 * Instantiates a new DAO level.
 	 *
-	 * @param connection
-	 *          the connection
-	 * @throws SQLException
-	 *           the SQL exception
+	 * @param connection the connection
+	 * @throws SQLException the SQL exception
 	 */
 	public DAOLevel(final Connection connection) throws SQLException {
 		super(connection);

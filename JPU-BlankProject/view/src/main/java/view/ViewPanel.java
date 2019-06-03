@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package view;
 
 import entity.Cave;
@@ -23,23 +26,49 @@ import javax.swing.JPanel;
 
 import contract.ControllerOrder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ViewPanel.
+ */
 public class ViewPanel extends JPanel implements Observer {
 
+	/** The view frame. */
 	private ViewFrame viewFrame;
 
+	/** The Px. */
 	int Px;
+	
+	/** The Py. */
 	int Py;
+	
+	/** The check value. */
 	boolean checkValue;
+	
+	/** The score. */
 	int score = 0; // initialisation of the score
+	
+	/** The diamond value. */
 	int diamondValue = 20; // set the global value of diamond
+	
+	/** The level exit score. */
 	int levelExitScore = 250; // set the goal score to end a level
+	
+	/** The start value. */
 	int startValue = 0; // permit to start the gravity thread
 
+	/** The test. */
 	public static HashMap<Point, Cave> test = new HashMap<>();
 
 	// ______________________________________ \\
+	/**
+	 * The Class MyRunnable.
+	 */
 	// thread who permit to create gravity \\
 	public class MyRunnable implements Runnable {
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run() {
 			int i = 1;
@@ -60,8 +89,15 @@ public class ViewPanel extends JPanel implements Observer {
 	// ______________________________________ \\
 
 	// -------------------------------------- \\
+	/**
+	 * The Class MyRunnableMonster.
+	 */
 	// thread de gestion de la gravité \\
 	public class MyRunnableMonster implements Runnable {
+		
+		/* (non-Javadoc)
+		 * @see java.lang.Runnable#run()
+		 */
 		@Override
 		public void run() {
 			int i = 1;
@@ -82,9 +118,7 @@ public class ViewPanel extends JPanel implements Observer {
 	}
 	// -------------------------------------- \\
 
-	/**
-	 * The Constant serialVersionUID.
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -998294702363713521L;
 
 	/**
@@ -160,17 +194,32 @@ public class ViewPanel extends JPanel implements Observer {
 
 	}
 
+	/**
+	 * Lose.
+	 */
 	public void lose() {
 		viewFrame.printMessage("you lose"); //open a window to print the lose message
 		System.exit(0); //kill the game
 
 	}
 
+	/**
+	 * Win.
+	 *
+	 * @param score the score
+	 */
 	public void win(int score) {
 		viewFrame.printMessage("you win with " + score + " point"); //open a window to print the win message
 		System.exit(0); //kill the game
 	}
 
+	/**
+	 * Explode.
+	 *
+	 * @param explodeY the explode Y
+	 * @param explodeX the explode X
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void explode(int explodeY, int explodeX) throws IOException { //clear every tile within the explosion radius
 		Graphics graphics = this.getGraphics();
 		int playerx = Rockford.getInstance().getX(); // get player's X coordinates
@@ -220,6 +269,11 @@ public class ViewPanel extends JPanel implements Observer {
 
 	}
 
+	/**
+	 * Item gravity.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void itemGravity() throws IOException {
 		
 		int testx = 32 * 29, testy = 32 * 29;
@@ -292,6 +346,16 @@ public class ViewPanel extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * Move monster.
+	 *
+	 * @param monster the monster
+	 * @param monsterX the monster X
+	 * @param monsterY the monster Y
+	 * @param dirX the dir X
+	 * @param dirY the dir Y
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void moveMonster(Cave monster, int monsterX, int monsterY, int dirX, int dirY) throws IOException {
 		//move the monster position and clear his previous position
 		Graphics graphics = this.getGraphics();
@@ -311,6 +375,11 @@ public class ViewPanel extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * Movement monster.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void movementMonster() throws IOException {
 		int monsterdebugleft = 0;
 		int monsterdebugup = 0;
@@ -465,6 +534,14 @@ public class ViewPanel extends JPanel implements Observer {
 	}
 
 	
+	/**
+	 * Hitbox.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param Px the px
+	 * @param Py the py
+	 */
 	public void hitbox(int x, int y, int Px, int Py) { //check the type of tile where the player try to go
 		Cave targetitem = test.get(new Point(x + Px, y + Py));
 		boolean destructablebyPlayer = targetitem.getDestructP1();
@@ -497,6 +574,14 @@ public class ViewPanel extends JPanel implements Observer {
 
 	}
 
+	/**
+	 * Push the rock.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param Px the px
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void pushTheRock(int x, int y, int Px) throws IOException { // if the player walk against a rock and the tile behind it is empty then move the rock 
 		Graphics graphics = this.getGraphics();
 		Cave targetitem = test.get(new Point(x + Px, y));
@@ -529,6 +614,14 @@ public class ViewPanel extends JPanel implements Observer {
 		}
 	}
 
+	/**
+	 * Move player.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 * @param co the co
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public void movePlayer(int x, int y, ControllerOrder co) throws IOException {
 		Graphics graphics = this.getGraphics();
 		switch (co) {

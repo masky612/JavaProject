@@ -1,13 +1,15 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package entity;
 
 import java.awt.Point;
 import java.io.IOException;
 import java.util.HashMap;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
- *
- * @author Jean-Aymeric Diet
+ * The Class Level.
  */
 public class Level extends Entity {
 
@@ -21,10 +23,10 @@ public class Level extends Entity {
 	private String message;
 
 	/**
-	 * Instantiates a new hello world.
+	 * Instantiates a new level.
 	 *
-	 * @param id      the id
-	 * @param key     the key
+	 * @param id the id
+	 * @param key the key
 	 * @param message the message
 	 */
 	public Level(final int id, final String key, final String message) {
@@ -34,7 +36,7 @@ public class Level extends Entity {
 	}
 
 	/**
-	 * Instantiates a new hello world.
+	 * Instantiates a new level.
 	 */
 	public Level() {
 		this(0, "", "");
@@ -96,7 +98,13 @@ public class Level extends Entity {
 
 	 // Creating HashMap to link objects with coordinates
 	
-	public HashMap<Point, Cave> createMap() throws IOException {
+	/**
+ 	 * Creates the map.
+ 	 *
+ 	 * @return the hash map
+ 	 * @throws IOException Signals that an I/O exception has occurred.
+ 	 */
+ 	public HashMap<Point, Cave> createMap() throws IOException {
 
 		String chaineMap = this.getMessage();
 		HashMap<Point, Cave> map = new HashMap<Point, Cave>();

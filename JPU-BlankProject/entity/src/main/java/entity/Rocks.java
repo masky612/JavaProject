@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package entity;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,8 +9,18 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Rocks.
+ */
 public class Rocks extends Cave {
 
+	/**
+	 * Instantiates a new rocks.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	public Rocks(final int x, final int y) {
 		this.setY(y);
 		this.setX(x);

@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package entity;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -6,8 +9,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Diamonds.
+ */
 public class Diamonds extends Cave {
 
+	/**
+	 * Instantiates a new diamonds.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	public Diamonds(final int x, final int y) {
 		this.setY(y);
 		this.setX(x);
@@ -31,6 +44,11 @@ public class Diamonds extends Cave {
 		}
 	}
 	
+	/**
+	 * Gets the image.
+	 *
+	 * @return the image
+	 */
 	public static Image getImage() {
 		
 		try {

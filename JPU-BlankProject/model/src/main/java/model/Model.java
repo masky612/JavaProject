@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package model;
 
 import java.sql.SQLException;
@@ -6,10 +9,9 @@ import java.util.Observable;
 import contract.IModel;
 import entity.Level;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Model.
- *
- * @author Jean-Aymeric Diet
  */
 public final class Model extends Observable implements IModel {
 
@@ -38,11 +40,10 @@ public final class Model extends Observable implements IModel {
 	}
 
 	/**
-     * Sets the hello world.
-     *
-     * @param level
-     *            the new hello world
-     */
+	 * Sets the level.
+	 *
+	 * @param level the new level
+	 */
 	private void setLevel(final Level level) {
 		this.level = level;
 		this.setChanged();

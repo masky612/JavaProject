@@ -1,9 +1,10 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package entity;
 
 /**
- * The Class Entity.12345
- *
- * @author Jean-Aymeric Diet
+ * The Class Entity.
  */
 public abstract class Entity {
 

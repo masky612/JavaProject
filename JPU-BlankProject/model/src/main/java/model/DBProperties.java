@@ -1,13 +1,15 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package model;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DBProperties.
- *
- * @author Jean-Aymeric Diet
  */
 class DBProperties extends Properties {
 
@@ -58,8 +60,7 @@ class DBProperties extends Properties {
 	/**
 	 * Sets the url.
 	 *
-	 * @param url
-	 *          the new url
+	 * @param url the new url
 	 */
 	private void setUrl(final String url) {
 		this.url = url;
@@ -77,8 +78,7 @@ class DBProperties extends Properties {
 	/**
 	 * Sets the login.
 	 *
-	 * @param login
-	 *          the new login
+	 * @param login the new login
 	 */
 	private void setLogin(final String login) {
 		this.login = login;
@@ -96,8 +96,7 @@ class DBProperties extends Properties {
 	/**
 	 * Sets the password.
 	 *
-	 * @param password
-	 *          the new password
+	 * @param password the new password
 	 */
 	private void setPassword(final String password) {
 		this.password = password;

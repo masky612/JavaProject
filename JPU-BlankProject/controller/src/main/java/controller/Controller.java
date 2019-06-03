@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package controller;
 
 
@@ -9,8 +12,10 @@ import contract.IController;
 import contract.IModel;
 import contract.IView;
 import entity.Rockford;
+// TODO: Auto-generated Javadoc
+
 /**
- * The Class Controller.1234
+ * The Class Controller.
  */
 public final class Controller implements IController {
 
@@ -19,12 +24,14 @@ public final class Controller implements IController {
 
 	/** The model. */
 	private IModel model;
+	
+	/** The game start. */
 	public boolean gameStart = false;
 
 	/**
 	 * Instantiates a new controller.
 	 *
-	 * @param view  the view
+	 * @param view the view
 	 * @param model the model
 	 */
 	public Controller(final IView view, final IModel model) {

@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package entity;
 
 import java.awt.Image;
@@ -7,9 +10,21 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Clear.
+ */
 public class Clear extends Cave {
+	
+	/** The Constant CLEAR_PATH. */
 	public final static String CLEAR_PATH = "D:\\images\\clear.png";
 	
+	/**
+	 * Instantiates a new clear.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	public Clear(final int x, final int y) {
 		this.setY(y);
 		this.setX(x);
@@ -29,6 +44,12 @@ public class Clear extends Cave {
 		}
 		
 	}
+	
+	/**
+	 * Gets the image.
+	 *
+	 * @return the image
+	 */
 	public static Image getImage() {
 		
 		try {

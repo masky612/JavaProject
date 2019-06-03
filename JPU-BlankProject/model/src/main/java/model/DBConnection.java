@@ -1,15 +1,18 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DBConnection.
- *
- * @author Jean-Aymeric Diet
  */
 final class DBConnection {
+	
 	/** The instance. */
 	private static DBConnection	INSTANCE	= null;
 

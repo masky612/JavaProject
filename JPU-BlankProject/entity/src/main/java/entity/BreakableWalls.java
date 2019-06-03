@@ -1,3 +1,6 @@
+/*
+ * @author Xavier Nicolas Adèle Antoine
+ */
 package entity;
 
 import java.awt.image.BufferedImage;
@@ -6,8 +9,18 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BreakableWalls.
+ */
 public class BreakableWalls extends Cave {
 
+	/**
+	 * Instantiates a new breakable walls.
+	 *
+	 * @param x the x
+	 * @param y the y
+	 */
 	public BreakableWalls(final int x, final int y) {
 		this.setY(y);
 		this.setX(x);
